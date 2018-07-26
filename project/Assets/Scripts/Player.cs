@@ -3,67 +3,85 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-    private static  Vector3 movement;
-    private Animation anim;
     private enum PlayerState
     {
-        IDLE,//默认状态
-        WALK//行走
-    };
-    private static PlayerState playerState;
+        ATTACK,
+        DEFENCE
+    }
+    private PlayerState playerState;
+    private static float h;
+    private static float v;
+    public GameObject goal;
+    private static  Vector3 movement;
+    private Animator animator;
     private Rigidbody rgd;
     public float speed=10;//移动速度
 	// Use this for initialization
 	void Start () {
         rgd = GetComponent<Rigidbody>();
-        playerState = PlayerState.IDLE;//初始化为默认状态
-        anim = GetComponent<Animation>();
-	}
+        animator = GetComponent<Animator>();
+    }
     private void FixedUpdate()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");     
+        h = Input.GetAxisRaw("Horizontal");
+        v = Input.GetAxisRaw("Vertical");     
         PlayerMove(h, v);
-        PlayerAnim();
         GetBall();
+        Shoot();
     }
     //移动控制
     void PlayerMove(float h,float v)
-    {
-        
+    {    
         movement=new Vector3(v, 0, -h); 
         if (movement != Vector3.zero)
         {
-            playerState = PlayerState.WALK;//设置为行走状态
+            animator.SetBool("Walk", true);
         }
         else
         {
-            playerState = PlayerState.IDLE;
+            animator.SetBool("Walk", false);
         }
         movement = movement.normalized * speed * Time.deltaTime; //movement.normalized使向量单位化，结果等于每帧角色移动的距离
         rgd.MovePosition(transform.position + movement);//移动
         transform.LookAt(transform.position+movement);  //面向前进的方向   
     }
-    //动画控制
-    void PlayerAnim()
-    {
-        switch (playerState)
-        {
-            case PlayerState.IDLE:
-                anim.Play("alert");
-                break;
-            case PlayerState.WALK:
-                anim.Play("walk");
-                break;
-        }
-    }
     //带球
     void GetBall()
     {
         float distance = Vector3.Distance(transform.position, GameManager.Instance.insBall.transform.position);
-        if (distance<1.5f)
+        if (distance<1.3f)
         {
-            GameManager.Instance.ballRgd.MovePosition(transform.position+movement.normalized*1);
+            playerState = PlayerState.ATTACK;
+                GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward * 1);
+        }
+        else
+        {
+            playerState = PlayerState.DEFENCE;
+        }
+    }
+    //射门
+    void Shoot()
+    {
+        if (Input.GetMouseButtonDown(0)&&playerState==PlayerState.ATTACK)
+        {
+            animator.SetBool("Shoot", true);
+            transform.LookAt(goal.transform);
+            Vector3 goalDir = (goal.transform.position - transform.position).normalized;
+       
+            if (movement != Vector3.zero)
+            {
+                GameManager.Instance.ballRgd.MovePosition(transform.position + goalDir * 1.4f);
+                GameManager.Instance.ballRgd.velocity = (goalDir+movement) * 40;//播放完毕，要执行的内容              
+            }
+            else
+            {
+                GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward*1.4f);
+                GameManager.Instance.ballRgd.velocity = (goalDir+transform.forward) * 40;
+            }           
+        }
+        else
+        {
+            animator.SetBool("Shoot", false);
         }
     }
 }
