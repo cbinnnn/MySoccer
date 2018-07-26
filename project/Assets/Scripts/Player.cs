@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
+    private static  Vector3 movement;
     private Animation anim;
     private enum PlayerState
     {
@@ -24,12 +25,13 @@ public class Player : MonoBehaviour {
         float v = Input.GetAxisRaw("Vertical");     
         PlayerMove(h, v);
         PlayerAnim();
+        GetBall();
     }
     //移动控制
     void PlayerMove(float h,float v)
     {
         
-        Vector3 movement=new Vector3(v, 0, -h); 
+        movement=new Vector3(v, 0, -h); 
         if (movement != Vector3.zero)
         {
             playerState = PlayerState.WALK;//设置为行走状态
@@ -53,6 +55,15 @@ public class Player : MonoBehaviour {
             case PlayerState.WALK:
                 anim.Play("walk");
                 break;
+        }
+    }
+    //带球
+    void GetBall()
+    {
+        float distance = Vector3.Distance(transform.position, GameManager.Instance.insBall.transform.position);
+        if (distance<1.5f)
+        {
+            GameManager.Instance.ballRgd.MovePosition(transform.position+movement.normalized*1);
         }
     }
 }
