@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-    private enum PlayerState
+    private enum PlayerState//玩家状态枚举类
     {
-        ATTACK,
-        DEFENCE
+        ATTACK,//进攻
+        DEFENCE//防守
     }
     private PlayerState playerState;
     private static float h;
     private static float v;
-    public GameObject goal;
-    private static  Vector3 movement;
+    public GameObject goal;//球门
+    private static  Vector3 movement;//移动方向
     private Animator animator;
     private Rigidbody rgd;
-    public float speed=10;//移动速度
+    public float speed=8;//初始移动速度
 	// Use this for initialization
 	void Start () {
         rgd = GetComponent<Rigidbody>();
@@ -32,15 +32,34 @@ public class Player : MonoBehaviour {
     //移动控制
     void PlayerMove(float h,float v)
     {    
-        movement=new Vector3(v, 0, -h); 
+        movement=new Vector3(v, 0, -h); //获得移动方向
         if (movement != Vector3.zero)
-        {
-            animator.SetBool("Walk", true);
+        {          
+            if (Input.GetKey(KeyCode.E))//按下E键加速
+            {
+                //动画状态机
+                animator.SetBool("Walk", false);
+                animator.SetBool("Run", true);
+                //加速后速度
+                speed = 12;
+            }
+            //没按E键或松开
+            else
+            {
+                //动画状态机
+                animator.SetBool("Run", false);
+                animator.SetBool("Walk", true);
+                //恢复默认速度
+                speed = 8;
+            }
         }
         else
         {
+            //动画状态机
             animator.SetBool("Walk", false);
+            animator.SetBool("Run", false);
         }
+        
         movement = movement.normalized * speed * Time.deltaTime; //movement.normalized使向量单位化，结果等于每帧角色移动的距离
         rgd.MovePosition(transform.position + movement);//移动
         transform.LookAt(transform.position+movement);  //面向前进的方向   
@@ -48,35 +67,35 @@ public class Player : MonoBehaviour {
     //带球
     void GetBall()
     {
-        float distance = Vector3.Distance(transform.position, GameManager.Instance.insBall.transform.position);
-        if (distance<1.3f)
+        float distance = Vector3.Distance(transform.position, GameManager.Instance.insBall.transform.position);//球和玩家的距离
+        if (distance<1.3f)//距离过近
         {
-            playerState = PlayerState.ATTACK;
-                GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward * 1);
+            playerState = PlayerState.ATTACK;//玩家切换进攻状态
+                GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward * 1);//球始终处于玩家前方
         }
         else
         {
-            playerState = PlayerState.DEFENCE;
+            playerState = PlayerState.DEFENCE;//玩家处于防守状态
         }
     }
     //射门
     void Shoot()
     {
-        if (Input.GetMouseButtonDown(0)&&playerState==PlayerState.ATTACK)
+        if (Input.GetMouseButtonDown(0)&&playerState==PlayerState.ATTACK)//玩家处于进攻状态时点击射门
         {
             animator.SetBool("Shoot", true);
-            transform.LookAt(goal.transform);
-            Vector3 goalDir = (goal.transform.position - transform.position).normalized;
+            transform.LookAt(goal.transform);//玩家面向球门
+            Vector3 goalDir = (goal.transform.position - transform.position).normalized;//球门方向
        
             if (movement != Vector3.zero)
             {
-                GameManager.Instance.ballRgd.MovePosition(transform.position + goalDir * 1.4f);
-                GameManager.Instance.ballRgd.velocity = (goalDir+movement) * 40;//播放完毕，要执行的内容              
+                GameManager.Instance.ballRgd.MovePosition(transform.position + goalDir * 1.4f);//球脱离过近距离
+                GameManager.Instance.ballRgd.velocity = (goalDir+movement) * 40;//球速和方向   
             }
             else
             {
-                GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward*1.4f);
-                GameManager.Instance.ballRgd.velocity = (goalDir+transform.forward) * 40;
+                GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward*1.4f);//球脱离过近距离
+                GameManager.Instance.ballRgd.velocity = (goalDir+transform.forward) * 40;//球速和方向
             }           
         }
         else
