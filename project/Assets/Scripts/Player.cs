@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-    private enum PlayerState//玩家状态枚举类
+    public bool isSelected;
+    public enum PlayerState//玩家状态枚举类
     {
         ATTACK,//进攻
-        DEFENCE//防守
-    }
-    private PlayerState playerState;
+        DEFENCE,//防守
+        HOLDING,//持球
+        SELECTED//被选中--------
+    };
+    public PlayerState playerState;
     private static float h;
     private static float v;
     public GameObject goal;//球门
@@ -23,11 +26,19 @@ public class Player : MonoBehaviour {
     }
     private void FixedUpdate()
     {
-        h = Input.GetAxisRaw("Horizontal");
-        v = Input.GetAxisRaw("Vertical");     
-        PlayerMove(h, v);
-        GetBall();
-        Shoot();
+        if (isSelected)
+        {
+            h = Input.GetAxisRaw("Horizontal");
+            v = Input.GetAxisRaw("Vertical");
+            PlayerMove(h, v);
+            GetBall();
+            Shoot();
+        }
+        else
+        {
+            animator.SetBool("Walk", false);
+            animator.SetBool("Run", false);
+        }
     }
     //移动控制
     void PlayerMove(float h,float v)
@@ -70,18 +81,18 @@ public class Player : MonoBehaviour {
         float distance = Vector3.Distance(transform.position, GameManager.Instance.insBall.transform.position);//球和玩家的距离
         if (distance<1.3f)//距离过近
         {
-            playerState = PlayerState.ATTACK;//玩家切换进攻状态
+            playerState = PlayerState.HOLDING;//玩家切换进攻状态
                 GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward * 1);//球始终处于玩家前方
         }
         else
         {
-            playerState = PlayerState.DEFENCE;//玩家处于防守状态
+            playerState = PlayerState.ATTACK;//玩家处于进攻状态
         }
     }
     //射门
     void Shoot()
     {
-        if (Input.GetMouseButtonDown(0)&&playerState==PlayerState.ATTACK)//玩家处于进攻状态时点击射门
+        if (Input.GetMouseButtonDown(0)&&playerState==PlayerState.HOLDING)//玩家处于进攻状态时点击射门
         {
             animator.SetBool("Shoot", true);
             transform.LookAt(goal.transform);//玩家面向球门
