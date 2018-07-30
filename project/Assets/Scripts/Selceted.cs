@@ -24,6 +24,7 @@ public class Selceted : MonoBehaviour {
     }
     void Update ()
     {
+        //防守时
         //Player1被选中
         if (transform.parent == Player1)
         {
@@ -138,6 +139,130 @@ public class Selceted : MonoBehaviour {
                 }
             }
         }
-
+        if (player1Script.isPassed)
+        {
+            transform.position = Player1.position;
+            transform.SetParent(Player1);
+            player1Script.isSelected = true;
+            player2Script.isSelected = false;
+            player3Script.isSelected = false;
+            player4Script.isSelected = false;
+            player5Script.isSelected = false;
+        }
+        else if (player2Script.isPassed)
+        {
+            transform.position = Player2.position;
+            transform.SetParent(Player2);
+            player2Script.isSelected = true;
+            player1Script.isSelected = false;
+            player3Script.isSelected = false;
+            player4Script.isSelected = false;
+            player5Script.isSelected = false;
+        }
+        else if (player3Script.isPassed)
+        {
+            transform.position = Player3.position;
+            transform.SetParent(Player3);
+            player3Script.isSelected = true;
+            player1Script.isSelected = false;
+            player2Script.isSelected = false;
+            player4Script.isSelected = false;
+            player5Script.isSelected = false;
+        }
+        else if (player4Script.isPassed)
+        {
+            transform.position = Player4.position;
+            transform.SetParent(Player4);
+            player4Script.isSelected = true;
+            player1Script.isSelected = false;
+            player2Script.isSelected = false;
+            player3Script.isSelected = false;
+            player5Script.isSelected = false;
+        }
+        else if (player5Script.isPassed)
+        {
+            transform.position = Player5.position;
+            transform.SetParent(Player5);
+            player5Script.isSelected = true;
+            player1Script.isSelected = false;
+            player2Script.isSelected = false;
+            player3Script.isSelected = false;
+            player4Script.isSelected = false;
+        }
+        if (player1Script.playerState == Player.PlayerState.HOLDING)
+        {
+            transform.position = Player1.position;
+            transform.SetParent(Player1);
+            player1Script.isSelected = true;
+            player2Script.isSelected = false;
+            player3Script.isSelected = false;
+            player4Script.isSelected = false;
+            player5Script.isSelected = false;
+            player1Script.isPassed = false;
+            player2Script.isPassed = false;
+            player3Script.isPassed = false;
+            player4Script.isPassed = false;
+            player5Script.isPassed = false;
+        }
+        else if (player2Script.playerState == Player.PlayerState.HOLDING)
+        {
+            transform.position = Player2.position;
+            transform.SetParent(Player2);
+            player2Script.isSelected = true;
+            player1Script.isSelected = false;
+            player3Script.isSelected = false;
+            player4Script.isSelected = false;
+            player5Script.isSelected = false;
+            player1Script.isPassed = false;
+            player2Script.isPassed = false;
+            player3Script.isPassed = false;
+            player4Script.isPassed = false;
+            player5Script.isPassed = false;
+        }
+        else if (player3Script.playerState == Player.PlayerState.HOLDING)
+        {
+            transform.position = Player3.position;
+            transform.SetParent(Player3);
+            player3Script.isSelected = true;
+            player1Script.isSelected = false;
+            player2Script.isSelected = false;
+            player4Script.isSelected = false;
+            player5Script.isSelected = false;
+            player1Script.isPassed = false;
+            player2Script.isPassed = false;
+            player3Script.isPassed = false;
+            player4Script.isPassed = false;
+            player5Script.isPassed = false;
+        }
+        else if (player4Script.playerState == Player.PlayerState.HOLDING)
+        {
+            transform.position = Player4.position;
+            transform.SetParent(Player4);
+            player4Script.isSelected = true;
+            player1Script.isSelected = false;
+            player2Script.isSelected = false;
+            player3Script.isSelected = false;
+            player5Script.isSelected = false;
+            player1Script.isPassed = false;
+            player2Script.isPassed = false;
+            player3Script.isPassed = false;
+            player4Script.isPassed = false;
+            player5Script.isPassed = false;
+        }
+        else if (player5Script.playerState == Player.PlayerState.HOLDING)
+        {
+            transform.position = Player5.position;
+            transform.SetParent(Player5);
+            player5Script.isSelected = true;
+            player1Script.isSelected = false;
+            player2Script.isSelected = false;
+            player3Script.isSelected = false;
+            player4Script.isSelected = false;
+            player1Script.isPassed = false;
+            player2Script.isPassed = false;
+            player3Script.isPassed = false;
+            player4Script.isPassed = false;
+            player5Script.isPassed = false;
+        }
     }
 }

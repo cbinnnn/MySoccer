@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
+    public bool isPassed;
     public bool isSelected;
     public enum PlayerState//玩家状态枚举类
     {
         ATTACK,//进攻
         DEFENCE,//防守
-        HOLDING,//持球
-        SELECTED//被选中--------
+        HOLDING//持球
     };
     public PlayerState playerState;
     private static float h;
@@ -32,12 +32,22 @@ public class Player : MonoBehaviour {
             v = Input.GetAxisRaw("Vertical");
             PlayerMove(h, v);
             GetBall();
+            Pass();
             Shoot();
         }
         else
         {
             animator.SetBool("Walk", false);
             animator.SetBool("Run", false);
+            float distance = Vector3.Distance(transform.position, GameManager.Instance.insBall.transform.position);//球和玩家的距离
+            if (distance < 1.3f)//距离过近
+            {
+                isPassed = true;
+            }
+            else
+            {
+                isPassed = false;
+            }
         }
     }
     //移动控制
@@ -96,9 +106,7 @@ public class Player : MonoBehaviour {
         {
             animator.SetBool("Shoot", true);
             transform.LookAt(goal.transform);//玩家面向球门
-            Vector3 goalDir = (goal.transform.position - transform.position+new Vector3(Random.Range(-3f,3f),0,0)).normalized;//球门方向
-       
-            
+            Vector3 goalDir = (goal.transform.position - transform.position+new Vector3(Random.Range(-3f,3f),0,0)).normalized;//球门方向            
                 GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward*1.4f);//球脱离过近距离
                 Vector3 vector3 = (goalDir+transform.forward)* 12;
                 vector3.y = 7f;
@@ -111,6 +119,15 @@ public class Player : MonoBehaviour {
     }
     void Pass()
     {
-
+        if (playerState == PlayerState.HOLDING && Input.GetKeyDown(KeyCode.S))
+        {
+            animator.SetBool("Pass", true);
+            GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward * 2f);//球脱离过近距离
+            GameManager.Instance.ballRgd.velocity = transform.forward * 20 ;
+        }
+        else
+        {
+            animator.SetBool("Pass", false);
+        }
     }
 }
