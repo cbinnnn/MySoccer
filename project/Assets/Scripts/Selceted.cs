@@ -21,7 +21,8 @@ public class Selceted : MonoBehaviour {
         player4Script = Player4.GetComponent<Player>();
         player5Script = Player5.GetComponent<Player>();
     }
-    void Update () {
+    void Update ()
+    {
         if (transform.parent == Player1)
         {
             player1Script.isSelected = true;
@@ -35,6 +36,9 @@ public class Selceted : MonoBehaviour {
                 {
                     transform.position = Player2.position;
                     transform.parent = Player2;
+                    transform.localEulerAngles = new Vector3(-90, 0, 0);
+                    
+                    
                 }
             }
         }
@@ -51,6 +55,8 @@ public class Selceted : MonoBehaviour {
                 {
                     transform.position = Player3.position;
                     transform.parent = Player3;
+                    transform.localEulerAngles = new Vector3(-90, 0, 0);
+
                 }
             }
         }
@@ -67,6 +73,7 @@ public class Selceted : MonoBehaviour {
                 {
                     transform.position = Player4.position;
                     transform.parent = Player4;
+                    transform.localEulerAngles = new Vector3(-90, 0, 0);
                 }
             }
         }
@@ -83,6 +90,8 @@ public class Selceted : MonoBehaviour {
                 {
                     transform.position = Player5.position;
                     transform.parent = Player5;
+                    transform.localEulerAngles = new Vector3(-90, 0, 0);
+
                 }
             }
         }
@@ -99,6 +108,8 @@ public class Selceted : MonoBehaviour {
                 {
                     transform.position = Player1.position;
                     transform.parent = Player1;
+                    transform.localEulerAngles = new Vector3(-90, 0, 0);
+
                 }
             }
         }
