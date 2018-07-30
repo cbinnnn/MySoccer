@@ -15,7 +15,7 @@ public class Player : MonoBehaviour {
     private static float h;
     private static float v;
     public GameObject goal;//球门
-    public static  Vector3 movement;//移动方向
+    private static  Vector3 movement;//移动方向
     private Animator animator;
     private Rigidbody rgd;
     public float speed=8;//初始移动速度
@@ -26,7 +26,7 @@ public class Player : MonoBehaviour {
     }
     private void FixedUpdate()
     {
-        if (isSelected)
+        if (isSelected)//如果被选中的话
         {
             h = Input.GetAxisRaw("Horizontal");
             v = Input.GetAxisRaw("Vertical");
@@ -86,13 +86,13 @@ public class Player : MonoBehaviour {
         }
         else
         {
-            playerState = PlayerState.ATTACK;//玩家处于进攻状态
+            playerState = PlayerState.DEFENCE;//玩家处于进攻状态
         }
     }
     //射门
     void Shoot()
     {
-        if (Input.GetMouseButtonDown(0)&&playerState==PlayerState.HOLDING)//玩家处于进攻状态时点击射门
+        if (Input.GetMouseButtonDown(0)&&playerState==PlayerState.HOLDING)//玩家处于持球状态时点击射门
         {
             animator.SetBool("Shoot", true);
             transform.LookAt(goal.transform);//玩家面向球门
@@ -108,5 +108,9 @@ public class Player : MonoBehaviour {
         {
             animator.SetBool("Shoot", false);
         }
+    }
+    void Pass()
+    {
+
     }
 }

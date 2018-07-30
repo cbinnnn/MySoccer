@@ -15,6 +15,7 @@ public class Selceted : MonoBehaviour {
     private Player player5Script;
     private void Start()
     {
+        //取得球员身上的脚本
         player1Script = Player1.GetComponent<Player>();
         player2Script = Player2.GetComponent<Player>();
         player3Script = Player3.GetComponent<Player>();
@@ -23,6 +24,7 @@ public class Selceted : MonoBehaviour {
     }
     void Update ()
     {
+        //Player1被选中
         if (transform.parent == Player1)
         {
             player1Script.isSelected = true;
@@ -30,15 +32,18 @@ public class Selceted : MonoBehaviour {
             player3Script.isSelected = false;
             player4Script.isSelected = false;
             player5Script.isSelected = false;
-            if (player1Script.playerState == Player.PlayerState.ATTACK)
+            //箭头始终朝向足球
+            Vector3 ballDir = GameManager.Instance.insBall.transform.position - Player1.position;//足球方向
+            float angle = Vector3.Angle(Player1.forward, ballDir);//计算球员前方与足球方向的夹角
+            angle *= Mathf.Sign(Vector3.Cross(Player1.forward, ballDir).y);//解决角度只能计算到180的限制
+            transform.localEulerAngles = new Vector3(-90, 0, angle);//改变箭头在Inspector的Rotation;
+            
+            if (player1Script.playerState == Player.PlayerState.DEFENCE)//如果处于防守状态
             {
-                if (Input.GetKeyDown(KeyCode.S))
-                {
+                if (Input.GetKeyDown(KeyCode.S))//按切换
+                {                    
                     transform.position = Player2.position;
-                    transform.parent = Player2;
-                    transform.localEulerAngles = new Vector3(-90, 0, 0);
-                    
-                    
+                    transform.SetParent(Player2);
                 }
             }
         }
@@ -49,13 +54,18 @@ public class Selceted : MonoBehaviour {
             player3Script.isSelected = false;
             player4Script.isSelected = false;
             player5Script.isSelected = false;
-            if (player2Script.playerState == Player.PlayerState.ATTACK)
+
+            Vector3 ballDir = GameManager.Instance.insBall.transform.position - Player2.position;
+            float angle = Vector3.Angle(Player2.forward, ballDir);
+            angle *= Mathf.Sign(Vector3.Cross(Player2.forward, ballDir).y);
+            transform.localEulerAngles = new Vector3(-90, 0, angle);
+
+            if (player2Script.playerState == Player.PlayerState.DEFENCE)
             {
                 if (Input.GetKeyDown(KeyCode.S))
                 {
                     transform.position = Player3.position;
-                    transform.parent = Player3;
-                    transform.localEulerAngles = new Vector3(-90, 0, 0);
+                    transform.SetParent(Player3);
 
                 }
             }
@@ -67,13 +77,18 @@ public class Selceted : MonoBehaviour {
             player2Script.isSelected = false;
             player4Script.isSelected = false;
             player5Script.isSelected = false;
-            if (player3Script.playerState == Player.PlayerState.ATTACK)
+
+            Vector3 ballDir = GameManager.Instance.insBall.transform.position - Player3.position;
+            float angle = Vector3.Angle(Player3.forward, ballDir);
+            angle *= Mathf.Sign(Vector3.Cross(Player3.forward, ballDir).y);
+            transform.localEulerAngles = new Vector3(-90, 0, angle);
+
+            if (player3Script.playerState == Player.PlayerState.DEFENCE)
             {
                 if (Input.GetKeyDown(KeyCode.S))
                 {
                     transform.position = Player4.position;
-                    transform.parent = Player4;
-                    transform.localEulerAngles = new Vector3(-90, 0, 0);
+                    transform.SetParent(Player4);
                 }
             }
         }
@@ -84,13 +99,18 @@ public class Selceted : MonoBehaviour {
             player2Script.isSelected = false;
             player3Script.isSelected = false;
             player5Script.isSelected = false;
-            if (player4Script.playerState == Player.PlayerState.ATTACK)
+
+            Vector3 ballDir = GameManager.Instance.insBall.transform.position - Player4.position;
+            float angle = Vector3.Angle(Player4.forward, ballDir);
+            angle *= Mathf.Sign(Vector3.Cross(Player4.forward, ballDir).y);
+            transform.localEulerAngles = new Vector3(-90, 0, angle);
+
+            if (player4Script.playerState == Player.PlayerState.DEFENCE)
             {
                 if (Input.GetKeyDown(KeyCode.S))
                 {
                     transform.position = Player5.position;
-                    transform.parent = Player5;
-                    transform.localEulerAngles = new Vector3(-90, 0, 0);
+                    transform.SetParent(Player5);
 
                 }
             }
@@ -102,13 +122,18 @@ public class Selceted : MonoBehaviour {
             player2Script.isSelected = false;
             player3Script.isSelected = false;
             player4Script.isSelected = false;
-            if (player5Script.playerState == Player.PlayerState.ATTACK)
+
+            Vector3 ballDir = GameManager.Instance.insBall.transform.position - Player5.position;
+            float angle = Vector3.Angle(Player5.forward, ballDir);
+            angle *= Mathf.Sign(Vector3.Cross(Player5.forward, ballDir).y);
+            transform.localEulerAngles = new Vector3(-90, 0, angle);
+
+            if (player5Script.playerState == Player.PlayerState.DEFENCE)
             {
                 if (Input.GetKeyDown(KeyCode.S))
                 {
                     transform.position = Player1.position;
-                    transform.parent = Player1;
-                    transform.localEulerAngles = new Vector3(-90, 0, 0);
+                    transform.SetParent(Player1);
 
                 }
             }
