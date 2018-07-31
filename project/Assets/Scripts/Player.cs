@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-    public bool isPassed;
     public bool isSelected;
+    public Transform passPlayer;
     public enum PlayerState//玩家状态枚举类
     {
         ATTACK,//进攻
@@ -40,13 +40,9 @@ public class Player : MonoBehaviour {
             animator.SetBool("Walk", false);
             animator.SetBool("Run", false);
             float distance = Vector3.Distance(transform.position, GameManager.Instance.insBall.transform.position);//球和玩家的距离
-            if (distance < 1.3f)//距离过近
+            if (distance < 1.3f)//判断是否被传球
             {
-                isPassed = true;
-            }
-            else
-            {
-                isPassed = false;
+                playerState = PlayerState.HOLDING;
             }
         }
     }
@@ -117,16 +113,19 @@ public class Player : MonoBehaviour {
             animator.SetBool("Shoot", false);
         }
     }
+    //传球
     void Pass()
     {
-        if (playerState == PlayerState.HOLDING && Input.GetKeyDown(KeyCode.S))
+        if (playerState == PlayerState.HOLDING && Input.GetKeyDown(KeyCode.S))//持球状态下按下S
         {
-            animator.SetBool("Pass", true);
+            transform.LookAt(passPlayer);//面向接球者
+            animator.SetBool("Pass", true);//动画状态机
             GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward * 2f);//球脱离过近距离
-            GameManager.Instance.ballRgd.velocity = transform.forward * 20 ;
+            GameManager.Instance.ballRgd.velocity = (passPlayer.position - transform.position).normalized * 25;//传球速度
         }
         else
         {
+            //动画状态机
             animator.SetBool("Pass", false);
         }
     }
