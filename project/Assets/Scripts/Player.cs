@@ -16,7 +16,7 @@ public class Player : MonoBehaviour {
     private static float v;
     public GameObject goal;//球门
     private static  Vector3 movement;//移动方向
-    private Animator animator;
+    public Animator animator;
     private Rigidbody rgd;
     public float speed=8;//初始移动速度
 	// Use this for initialization

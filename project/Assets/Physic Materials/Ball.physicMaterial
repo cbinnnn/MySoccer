@@ -10,7 +10,7 @@ PhysicMaterial:
   staticFriction: 0.4
   bounciness: 1
   frictionCombine: 0
-  bounceCombine: 0
+  bounceCombine: 1
 --- !u!1002 &13400001
 EditorExtensionImpl:
   serializedVersion: 6
