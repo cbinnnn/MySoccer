@@ -18,6 +18,7 @@ public class SettingBtn : MonoBehaviour {
         }
         if (SceneManager.GetActiveScene().name == "Game")
         {
+            Time.timeScale = 0;
             GameObject settingPanel = Resources.Load("SettingPanel1") as GameObject;
             Instantiate(settingPanel, canvas);
         }       

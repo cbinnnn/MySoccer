@@ -571,10 +571,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400062}
-  - component: {fileID: 11100000}
   - component: {fileID: 5400000}
   - component: {fileID: 13600000}
-  - component: {fileID: 11400000}
   - component: {fileID: 8200000}
   m_Layer: 0
   m_Name: GoalKeeper
@@ -1155,7 +1153,7 @@ Transform:
   m_GameObject: {fileID: 100062}
   m_LocalRotation: {x: 0, y: 0.9999893, z: 0, w: -0.00464423}
   m_LocalPosition: {x: -2.7052374, y: 0.0000015199184, z: 15.965041}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.65, y: 1.65, z: 1.65}
   m_Children:
   - {fileID: 400074}
   - {fileID: 400064}
@@ -1403,43 +1401,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!111 &11100000
-Animation:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100062}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 74c242bd886e65c41b70272634c3f334, type: 3}
-  m_Animations:
-  - {fileID: 7400000, guid: 67c557e37305bc04f9f1810067d6303f, type: 3}
-  - {fileID: 7400000, guid: 495ea9597363dc540a5a66e26835cbd6, type: 3}
-  - {fileID: 7400000, guid: c44ddeb9924c545d5a7293172678a65e, type: 3}
-  - {fileID: 7400000, guid: 15c767711db1f474b9a73374726218ad, type: 3}
-  - {fileID: 7400000, guid: a32b00d999245bd40b411444934e5e03, type: 3}
-  - {fileID: 7400000, guid: 8393b97223b4b5749945c680c46c8686, type: 3}
-  - {fileID: 7400000, guid: e7fad45ce83ccf74cbc1029b72defe24, type: 3}
-  - {fileID: 7400000, guid: 3e97d95da27306246a576ba1c74c0683, type: 3}
-  - {fileID: 7400000, guid: 11194d92b0afc26449872fd19decbc3e, type: 3}
-  - {fileID: 7400002, guid: fb2e778529f656541986d55c3b221864, type: 3}
-  - {fileID: 7400000, guid: eba4d2e9edda58342b247b61dc830d9e, type: 3}
-  - {fileID: 7400000, guid: 8411d581524d75049a9380e53631c0d7, type: 3}
-  - {fileID: 7400000, guid: e2f9b08718ffa2d49b9064717e9b9286, type: 3}
-  - {fileID: 7400000, guid: 31e8c0e1f527843d0bc810c3e05822f9, type: 3}
-  - {fileID: 7400000, guid: d0afa60575bf545ceb250efb036054a9, type: 3}
-  - {fileID: 7400000, guid: b02628fe2528079438af7d2fc1e12f70, type: 3}
-  - {fileID: 7400000, guid: f06aeb8b9cfce482f84b85abc912f38e, type: 3}
-  - {fileID: 7400000, guid: dfc6b009d06084112a91d72ca3a0fd00, type: 3}
-  - {fileID: 7400000, guid: 41d123552fdf94d9d90a24b62d8609cd, type: 3}
-  - {fileID: 7400000, guid: 78ff41003cf6d4dfaa5dc7230c5d127e, type: 3}
-  - {fileID: 7400000, guid: a480c2763bff84890bab8f7c0b3d7bd8, type: 3}
-  - {fileID: 7400000, guid: 1ff5b7a8edbef45baaa28fce0d729d90, type: 3}
-  - {fileID: 7400000, guid: f21d83d98e6474b1a99032fdff47202b, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1002 &11100001
 EditorExtensionImpl:
   serializedVersion: 6
@@ -1457,31 +1418,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b55ee989444b4727bae803ee8bdcbf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitGround: {fileID: 8300000, guid: 370c77b04328e4308ad190bb59487aee, type: 3}
-  kick: {fileID: 8300000, guid: aa866efb87e154a519b3546090963d8d, type: 3}
-  accelerationValue: 3
-  Name: 
-  goal: {fileID: 0}
-  centro_campo: {fileID: 0}
-  Ball: {fileID: 0}
-  initial_Position: {x: 0, y: 0, z: 0}
-  hand_bone: {fileID: 0}
-  headTransform: {fileID: 0}
-  coreGame: {fileID: 0}
-  distanceToJump: 0
-  players: []
-  oponents: []
 --- !u!1002 &11400001
 EditorExtensionImpl:
   serializedVersion: 6
