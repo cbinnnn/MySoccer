@@ -568,7 +568,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400062}
-  - component: {fileID: 11100000}
   - component: {fileID: 5400000}
   - component: {fileID: 13600000}
   - component: {fileID: 11400000}
@@ -1150,9 +1149,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100062}
-  m_LocalRotation: {x: 0, y: 0.053647075, z: 0, w: -0.99855995}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.1397972, y: 0.00046110153, z: -11.957162}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.65, y: 1.65, z: 1.65}
   m_Children:
   - {fileID: 400068}
   - {fileID: 400064}
@@ -1346,46 +1345,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!111 &11100000
-Animation:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100062}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 74c242bd886e65c41b70272634c3f334, type: 3}
-  m_Animations:
-  - {fileID: 7400000, guid: 67c557e37305bc04f9f1810067d6303f, type: 3}
-  - {fileID: 7400000, guid: 495ea9597363dc540a5a66e26835cbd6, type: 3}
-  - {fileID: 7400000, guid: c44ddeb9924c545d5a7293172678a65e, type: 3}
-  - {fileID: 7400000, guid: 8411d581524d75049a9380e53631c0d7, type: 3}
-  - {fileID: 0}
-  - {fileID: 7400000, guid: 8393b97223b4b5749945c680c46c8686, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 7400000, guid: 11194d92b0afc26449872fd19decbc3e, type: 3}
-  - {fileID: 0}
-  - {fileID: 7400000, guid: eba4d2e9edda58342b247b61dc830d9e, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 7400000, guid: b696b5b67fe1b492db72b19f9afb80d7, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 7400000, guid: b02628fe2528079438af7d2fc1e12f70, type: 3}
-  - {fileID: 7400000, guid: 045a5610798d64a8db2818db1cb3178e, type: 3}
-  - {fileID: 7400000, guid: a480c2763bff84890bab8f7c0b3d7bd8, type: 3}
-  - {fileID: 7400000, guid: 33fe4bf7fdda149b0acc395e7a75c939, type: 3}
-  - {fileID: 7400000, guid: 28c0a7d1712934a7592b3012329a672d, type: 3}
-  - {fileID: 7400000, guid: 3708568712ae845cd98a610f3f20c74a, type: 3}
-  - {fileID: 0}
-  - {fileID: 7400000, guid: b3202f0f23cea4bccaf321ed38036742, type: 3}
-  - {fileID: 7400000, guid: 2f393ddeae6434d05b5546f1bcedb442, type: 3}
-  - {fileID: 7400000, guid: cdbfe0e844aff4870bec7a808d697a0b, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1002 &11100001
 EditorExtensionImpl:
   serializedVersion: 6
