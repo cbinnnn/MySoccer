@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour {
     }
     private void PositionReset()
     {
-        ball.transform.position = new Vector3(0, 0, 0);
+        insBall.transform.position = new Vector3(0, 0, 0);
         Player1.position = position1.position;
         Player1.rotation = position1.rotation;
         Player2.position = position2.position;

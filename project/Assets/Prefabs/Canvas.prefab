@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 114281465975816300}
   m_Layer: 5
   m_Name: Score2
-  m_TagString: Untagged
+  m_TagString: Score2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 114039135354783994}
   m_Layer: 5
   m_Name: Score1
-  m_TagString: Untagged
+  m_TagString: Score1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -684,8 +684,8 @@ RectTransform:
   m_Father: {fileID: 224473689492929172}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000076294, y: 261}
-  m_SizeDelta: {x: 399.5, y: 244.7}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -0.0000076294, y: -78}
+  m_SizeDelta: {x: 399.5, y: 244.70001}
   m_Pivot: {x: 0.5, y: 0.5}

@@ -13,17 +13,27 @@ public class GoalKeeper : MonoBehaviour {
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Ball")
+        if (other.tag == "Ball" && transform.parent.name == "GoalKeeper_Team1")
         {
             if(other.transform.position.x - transform.position.x > 0)
             {
                 goalKeeperAnimator.SetTrigger("Right_down");
-                goalKeeperRgd.velocity = new Vector3(5, 0, 0);
             }
             else if(other.transform.position.x - transform.position.x < 0)
             {
                 goalKeeperAnimator.SetTrigger("Left_down");
-                goalKeeperRgd.velocity = new Vector3(-5, 0, 0);
+            }
+
+        }
+        if (other.tag == "Ball" && transform.parent.name == "GoalKeeper_Opponent")
+        {
+            if (other.transform.position.x - transform.position.x < 0)
+            {
+                goalKeeperAnimator.SetTrigger("Right_down");
+            }
+            else if (other.transform.position.x - transform.position.x > 0)
+            {
+                goalKeeperAnimator.SetTrigger("Left_down");
             }
         }
     }
