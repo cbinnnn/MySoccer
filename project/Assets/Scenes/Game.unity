@@ -1661,6 +1661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goalKeeper: {fileID: 1522826738}
+  smoothing: 1
 --- !u!65 &127534361
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3057,6 +3058,7 @@ GameObject:
   - component: {fileID: 343684097}
   - component: {fileID: 343684096}
   - component: {fileID: 343684095}
+  - component: {fileID: 343684098}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3124,6 +3126,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &343684098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 343684094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb630f7205d82c44db5d599a14bad6bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &345695923
 GameObject:
   m_ObjectHideFlags: 0
@@ -6912,6 +6925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goalKeeper: {fileID: 553423984}
+  smoothing: 1
 --- !u!65 &763191284
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6923,8 +6937,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9534755, y: 0.8221497, z: 0.38796005}
-  m_Center: {x: -0.012133661, y: 0.3760613, z: 0.30602002}
+  m_Size: {x: 1.6238817, y: 0.8221497, z: 0.036757946}
+  m_Center: {x: -0.016567446, y: 0.3760613, z: 0.19894047}
 --- !u!33 &763191285
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -12084,8 +12098,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.682568, y: 2.1410575, z: 1.8535242}
-  m_Center: {x: 0.0021674084, y: 1.1223297, z: -1.0643662}
+  m_Size: {x: 5.682568, y: 2.1410575, z: 1.6616783}
+  m_Center: {x: 0.0021674084, y: 1.1223297, z: -1.1602892}
 --- !u!1 &1495107468
 GameObject:
   m_ObjectHideFlags: 0
@@ -13353,8 +13367,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.9051037, y: 2.224308, z: 2.053112}
-  m_Center: {x: -0.01888211, y: 1.0995252, z: -1.1384945}
+  m_Size: {x: 5.905103, y: 2.224308, z: 1.8407123}
+  m_Center: {x: -0.018882202, y: 1.0995252, z: -1.2446945}
 --- !u!1 &1606992621
 GameObject:
   m_ObjectHideFlags: 0
@@ -13489,7 +13503,7 @@ GameObject:
   - component: {fileID: 1633871519}
   - component: {fileID: 1633871518}
   m_Layer: 0
-  m_Name: NewCity
+  m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

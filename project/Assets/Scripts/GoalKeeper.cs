@@ -6,26 +6,33 @@ public class GoalKeeper : MonoBehaviour {
     public GameObject goalKeeper;
     private Animator goalKeeperAnimator;
     private Rigidbody goalKeeperRgd;
+    public float smoothing = 3f;
     private void Start()
     {
         goalKeeperAnimator = goalKeeper.GetComponent<Animator>();
         goalKeeperRgd = goalKeeper.GetComponent<Rigidbody>();
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Ball" && transform.parent.name == "GoalKeeper_Team1")
+        if (other.tag == "Ball" && transform.parent.name == "GoalKeeper_Opponent")
         {
             if(other.transform.position.x - transform.position.x > 0)
             {
-                goalKeeperAnimator.SetTrigger("Right_down");
+                if(other.transform.position.y<2)
+                    goalKeeperAnimator.SetTrigger("Right_down");
+                else
+                    goalKeeperAnimator.SetTrigger("Right_Up");
             }
             else if(other.transform.position.x - transform.position.x < 0)
             {
-                goalKeeperAnimator.SetTrigger("Left_down");
+                if (other.transform.position.y < 2)
+                    goalKeeperAnimator.SetTrigger("Left_down");
+                else
+                    goalKeeperAnimator.SetTrigger("Left_Up");
             }
-
+            goalKeeperRgd.MovePosition(Vector3.Lerp(goalKeeperRgd.position, other.transform.position,smoothing* Time.deltaTime));
         }
-        if (other.tag == "Ball" && transform.parent.name == "GoalKeeper_Opponent")
+        if (other.tag == "Ball" && transform.parent.name == "GoalKeeper_Team1")
         {
             if (other.transform.position.x - transform.position.x < 0)
             {
@@ -35,6 +42,7 @@ public class GoalKeeper : MonoBehaviour {
             {
                 goalKeeperAnimator.SetTrigger("Left_down");
             }
+
         }
     }
 }
