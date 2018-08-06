@@ -10048,8 +10048,6 @@ MonoBehaviour:
   ballRgd: {fileID: 0}
   insBall: {fileID: 0}
   ball: {fileID: 100000, guid: 50ac29d6ac8604f1ab45ea4fdc30e7ee, type: 2}
-  audioSource: {fileID: 0}
-  applause: {fileID: 8300000, guid: e2ef4fa0185fb47169b63fdaa5e6e9cf, type: 3}
 --- !u!4 &1135360901
 Transform:
   m_ObjectHideFlags: 0

@@ -31,7 +31,7 @@ public class Trigger : MonoBehaviour {
             GameManager.Instance.opponent4Animator.SetTrigger("Lose");
             GameManager.Instance.opponent5Animator.SetTrigger("Lose");
             GameManager.Instance.opponentGoalKeeperAnimator.SetTrigger("Lose");
-            GameManager.Instance.audioSource.PlayOneShot(GameManager.Instance.applause);
+            AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.applause);
             StartCoroutine(GameManager.Instance.Restart());
         }
         else if (other.tag == "Ball" &&transform.parent.name == "GoalMeshLeft")

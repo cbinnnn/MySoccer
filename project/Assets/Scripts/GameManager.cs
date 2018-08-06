@@ -51,8 +51,6 @@ public class GameManager : MonoBehaviour {
     public Rigidbody ballRgd;
     public GameObject insBall;
     public GameObject ball;
-    public AudioSource audioSource;
-    public AudioClip applause;
     private static GameManager _instance;
     public  static GameManager Instance
     {
@@ -86,7 +84,6 @@ public class GameManager : MonoBehaviour {
         opponent4Animator = Opponent4.GetComponent<Animator>();
         opponent5Animator = Opponent5.GetComponent<Animator>();
         opponentGoalKeeperAnimator = OpponentGoalKeeper.GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
     }
     private void FixedUpdate()
     {
