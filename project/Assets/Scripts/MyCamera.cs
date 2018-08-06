@@ -15,7 +15,6 @@ public class MyCamera : MonoBehaviour {
     private Vector3 endPos;//镜头要到达的位置
 	void Start () {
             offset = transform.position - Vector3.zero;//默认偏移量
-            nowCamera = "球员";
     }
 	
 	void Update () {

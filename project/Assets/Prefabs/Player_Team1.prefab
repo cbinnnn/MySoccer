@@ -126,7 +126,6 @@ GameObject:
   - component: {fileID: 4237585636839246}
   - component: {fileID: 33976216756188608}
   - component: {fileID: 23601444381496466}
-  - component: {fileID: 111055691170027712}
   m_Layer: 0
   m_Name: sombras
   m_TagString: Untagged
@@ -1099,20 +1098,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!111 &111055691170027712
-Animation:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1236146522278124}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &114459291867538840
 MonoBehaviour:
   m_ObjectHideFlags: 1
