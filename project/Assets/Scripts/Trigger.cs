@@ -8,7 +8,7 @@ public class Trigger : MonoBehaviour {
     
     private static  int score1;
     private static int score2;
-
+    
     private void Update()
     {
         score1Text.text = score1.ToString();
@@ -31,6 +31,7 @@ public class Trigger : MonoBehaviour {
             GameManager.Instance.opponent4Animator.SetTrigger("Lose");
             GameManager.Instance.opponent5Animator.SetTrigger("Lose");
             GameManager.Instance.opponentGoalKeeperAnimator.SetTrigger("Lose");
+            GameManager.Instance.audioSource.PlayOneShot(GameManager.Instance.applause);
             StartCoroutine(GameManager.Instance.Restart());
         }
         else if (other.tag == "Ball" &&transform.parent.name == "GoalMeshLeft")
