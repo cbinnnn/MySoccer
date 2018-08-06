@@ -88,7 +88,7 @@ public class Player : MonoBehaviour {
         if (distance<1.3f)//距离过近
         {
             playerState = PlayerState.HOLDING;//玩家切换进攻状态
-                GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward * 1);//球始终处于玩家前方
+                GameManager.Instance.ballRgd.MovePosition(Vector3.Lerp(GameManager.Instance.ballRgd.position, transform.position + transform.forward * 1,Time.deltaTime*15));//球始终处于玩家前方
         }
         else
         {
