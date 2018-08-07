@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour {
+    public Slider bgmSlider;
+    public Slider audioSlider;
     public AudioSource[] audioSources;
     public AudioClip applause;
     private static AudioManager _instance;
@@ -22,5 +24,6 @@ public class AudioManager : MonoBehaviour {
     void Start () {
         audioSources = GetComponents<AudioSource>();
         audioSources[1].Play();
+        
     }
 }
