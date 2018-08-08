@@ -102,11 +102,11 @@ public class Player : MonoBehaviour {
             animator.SetBool("Shoot", true);
             AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.kick);
             transform.LookAt(goal.transform);//玩家面向球门
-            Vector3 goalDir = (goal.transform.position - transform.position+new Vector3(Random.Range(-3f,3f),0,0)).normalized;//球门方向            
+            Vector3 goalDir = (goal.transform.position - (transform.position+new Vector3(Random.Range(-15f,15f),0,0))).normalized;//球门方向,往左右偏移量随机
                 GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward*1.4f);//球脱离过近距离
                 Vector3 vector3 = (goalDir+transform.forward)* 12;
                 vector3.y = 7f;
-                GameManager.Instance.ballRgd.velocity = vector3;       
+                GameManager.Instance.ballRgd.velocity = vector3;
         }
         else
         {
