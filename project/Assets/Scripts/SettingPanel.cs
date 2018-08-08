@@ -5,14 +5,18 @@ using UnityEngine.UI;
 
 public class SettingPanel : MonoBehaviour {
     public Toggle openBgm;
-    private static float lastvolume;
-    private float oldVolume;
+    public Toggle openAudio;
+    private static float lastBgmVolume;
+    private static float lastAudioVolume;
+    private float oldAudioVolume;
+    private float oldBgmVolume;
     public Text cameraSetting;
     public Slider bgmSlider;
     public Slider audioSlider;
     private void Awake()
     {
-        oldVolume = AudioManager.Instance.audioSources[1].volume;
+        oldBgmVolume = AudioManager.Instance.audioSources[1].volume;
+        oldAudioVolume = AudioManager.Instance.audioSources[0].volume;
     }
     private void Update()
     {
@@ -20,13 +24,18 @@ public class SettingPanel : MonoBehaviour {
         {
             openBgm.isOn = true;
         }
+        if (AudioManager.Instance.audioSources[0].volume > 0)
+        {
+            openAudio.isOn = true;
+        }
         bgmSlider.value = AudioManager.Instance.audioSources[1].volume;
         audioSlider.value= AudioManager.Instance.audioSources[0].volume;
     }
     public void CloseSettingPanel()
     {
         Time.timeScale = 1;
-        AudioManager.Instance.audioSources[1].volume = oldVolume;
+        AudioManager.Instance.audioSources[1].volume = oldBgmVolume;
+        AudioManager.Instance.audioSources[0].volume = oldAudioVolume;
         Destroy(this.gameObject);
     }
 	public void OnSave()
@@ -39,14 +48,27 @@ public class SettingPanel : MonoBehaviour {
     {
         if (openBgm.isOn)
         {
-            AudioManager.Instance.audioSources[1].volume = lastvolume;
+            AudioManager.Instance.audioSources[1].volume = lastBgmVolume;
         }
         else
         {
-            lastvolume = AudioManager.Instance.audioSources[1].volume;
+            lastBgmVolume = AudioManager.Instance.audioSources[1].volume;
             AudioManager.Instance.audioSources[1].volume = 0;
         }
         
+    }
+    public void Audio()
+    {
+        if (openAudio.isOn)
+        {
+            AudioManager.Instance.audioSources[0].volume = lastAudioVolume;
+        }
+        else
+        {
+            lastAudioVolume = AudioManager.Instance.audioSources[0].volume;
+            AudioManager.Instance.audioSources[0].volume = 0;
+        }
+
     }
     public void ChangeBgmVolume()
     {

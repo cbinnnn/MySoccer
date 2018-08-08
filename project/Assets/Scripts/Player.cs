@@ -19,11 +19,9 @@ public class Player : MonoBehaviour {
     public Animator animator;
     private Rigidbody rgd;
     public float speed=8;//初始移动速度
-    private AudioSource audioSource;
 	void Start () {
         rgd = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
     }
     private void FixedUpdate()
     {
@@ -102,7 +100,7 @@ public class Player : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)&&playerState==PlayerState.HOLDING)//玩家处于持球状态时点击射门
         {
             animator.SetBool("Shoot", true);
-            audioSource.Play();
+            AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.kick);
             transform.LookAt(goal.transform);//玩家面向球门
             Vector3 goalDir = (goal.transform.position - transform.position+new Vector3(Random.Range(-3f,3f),0,0)).normalized;//球门方向            
                 GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward*1.4f);//球脱离过近距离
@@ -122,7 +120,7 @@ public class Player : MonoBehaviour {
         {
             transform.LookAt(passPlayer);//面向接球者
             animator.SetBool("Pass", true);//动画状态机
-            audioSource.Play();
+            AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.kick);
             GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward * 2f);//球脱离过近距离
             GameManager.Instance.ballRgd.velocity = (passPlayer.position - transform.position).normalized * 25;//传球速度
         }

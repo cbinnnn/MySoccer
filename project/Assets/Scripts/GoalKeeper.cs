@@ -6,7 +6,7 @@ public class GoalKeeper : MonoBehaviour {
     public GameObject goalKeeper;
     private Animator goalKeeperAnimator;
     private Rigidbody goalKeeperRgd;
-    public float smoothing = 3f;
+    public float smoothing = 20f;
     private void Start()
     {
         goalKeeperAnimator = goalKeeper.GetComponent<Animator>();

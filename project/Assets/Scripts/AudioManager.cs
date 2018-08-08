@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour {
     public Slider audioSlider;
     public AudioSource[] audioSources;
     public AudioClip applause;
+    public AudioClip kick;
     private static AudioManager _instance;
     public static AudioManager Instance
     {
