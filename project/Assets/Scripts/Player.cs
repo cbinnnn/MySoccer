@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
+    public float power=100;//默认体力值
     public bool isSelected;
     public Transform passPlayer;
     public enum PlayerState//玩家状态枚举类
@@ -18,13 +19,15 @@ public class Player : MonoBehaviour {
     private static  Vector3 movement;//移动方向
     public Animator animator;
     private Rigidbody rgd;
-    public float speed=8;//初始移动速度
+    private float speed;//初始移动速度
+    public float upSpeed;//加速后速度
 	void Start () {
         rgd = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
     }
     private void FixedUpdate()
     {
+        
         if (isSelected)//如果被选中的话
         {
             h = Input.GetAxisRaw("Horizontal");
@@ -32,10 +35,11 @@ public class Player : MonoBehaviour {
             PlayerMove(h, v);
             GetBall();
             Pass();
-            Shoot();
+            Shoot();            
         }
         else
         {
+            
             animator.SetBool("Walk", false);
             animator.SetBool("Run", false);
             float distance = Vector3.Distance(transform.position, GameManager.Instance.insBall.transform.position);//球和玩家的距离
@@ -44,20 +48,23 @@ public class Player : MonoBehaviour {
                 playerState = PlayerState.HOLDING;
             }
         }
+        animator.SetFloat("power", power);
     }
     //移动控制
     void PlayerMove(float h,float v)
-    {    
-        movement=new Vector3(v, 0, -h); //获得移动方向
+    {
+        
+        movement =new Vector3(v, 0, -h); //获得移动方向
         if (movement != Vector3.zero)
         {          
             if (Input.GetKey(KeyCode.E))//按下E键加速
             {
+                MinusPower();
                 //动画状态机
                 animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
                 //加速后速度
-                speed = 12;
+                speed = Mathf.Lerp(speed,upSpeed,Time.deltaTime*2);
             }
             //没按E键或松开
             else
@@ -66,11 +73,13 @@ public class Player : MonoBehaviour {
                 animator.SetBool("Run", false);
                 animator.SetBool("Walk", true);
                 //恢复默认速度
-                speed = 8;
+                PowerToSpeed();
             }
+            Debug.Log(speed);
         }
         else
         {
+            RePower();
             //动画状态机
             animator.SetBool("Walk", false);
             animator.SetBool("Run", false);
@@ -128,6 +137,43 @@ public class Player : MonoBehaviour {
         {
             //动画状态机
             animator.SetBool("Pass", false);
+        }
+    }
+    void PowerToSpeed()//体力与速度的对应
+    {
+        //有体力的话默认速度
+        if (power > 66)
+        {
+            speed = 6;
+        }
+        else if (power > 33)
+        {
+            speed = 4.5f;
+        }
+        else
+        {
+            if (power == 0)//没有体力就走不动
+                speed = 0;
+            else
+                speed = 3f;
+        }        
+    }
+    void MinusPower()//扣除体力
+    {
+        if (power > 0)
+            power -= Time.deltaTime * 8;
+        else
+            power = 0;
+    }
+    void RePower()//恢复体力
+    {
+        if(power<100)
+        {
+            power += Time.deltaTime*2;
+        }
+        else
+        {
+            power = 100;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Selceted : MonoBehaviour {
+    public Canvas power;
     public Transform Player1;
     public Transform Player2;
     public Transform Player3;
@@ -122,6 +123,10 @@ public class Selceted : MonoBehaviour {
             //把光标移到接球者身上
             transform.position = Player1.position;
             transform.SetParent(Player1);
+            //把体力条移到接球者身上
+            power.transform.position = Player1.position;
+            power.transform.SetParent(Player1);
+            power.transform.localEulerAngles = new Vector3(power.transform.localEulerAngles.x, -90, power.transform.localEulerAngles.z);
             //设置isSelcted属性
             player1Script.isSelected = true;
             player2Script.isSelected = false;
@@ -134,6 +139,9 @@ public class Selceted : MonoBehaviour {
             player2Script.passPlayer = Nearest(Player2,Player1, Player3, Player4, Player5);
             transform.position = Player2.position;
             transform.SetParent(Player2);
+            power.transform.position = Player2.position;
+            power.transform.SetParent(Player2);
+            power.transform.localEulerAngles = new Vector3(power.transform.localEulerAngles.x, -90, power.transform.localEulerAngles.z);
             player2Script.isSelected = true;
             player1Script.isSelected = false;
             player3Script.isSelected = false;
@@ -145,6 +153,9 @@ public class Selceted : MonoBehaviour {
             player3Script.passPlayer = Nearest(Player3,Player2, Player1, Player4, Player5);
             transform.position = Player3.position;
             transform.SetParent(Player3);
+            power.transform.position = Player3.position;
+            power.transform.SetParent(Player3);
+            power.transform.localEulerAngles = new Vector3(power.transform.localEulerAngles.x, -90, power.transform.localEulerAngles.z);
             player3Script.isSelected = true;
             player1Script.isSelected = false;
             player2Script.isSelected = false;
@@ -156,6 +167,9 @@ public class Selceted : MonoBehaviour {
             player4Script.passPlayer = Nearest(Player4,Player2, Player3, Player1, Player5);
             transform.position = Player4.position;
             transform.SetParent(Player4);
+            power.transform.position = Player4.position;
+            power.transform.SetParent(Player4);
+            power.transform.localEulerAngles = new Vector3(power.transform.localEulerAngles.x, -90, power.transform.localEulerAngles.z);
             player4Script.isSelected = true;
             player1Script.isSelected = false;
             player2Script.isSelected = false;
@@ -167,6 +181,9 @@ public class Selceted : MonoBehaviour {
             player5Script.passPlayer = Nearest(Player5,Player2, Player3, Player4, Player1);
             transform.position = Player5.position;
             transform.SetParent(Player5);
+            power.transform.position = Player5.position;
+            power.transform.SetParent(Player5);
+            power.transform.localEulerAngles = new Vector3(power.transform.localEulerAngles.x, -90, power.transform.localEulerAngles.z);
             player5Script.isSelected = true;
             player1Script.isSelected = false;
             player2Script.isSelected = false;
@@ -202,8 +219,13 @@ public class Selceted : MonoBehaviour {
                 nearestPlayer = players[i];
             }
         }
+        //把光标移到最近的球员身上
         transform.position = nearestPlayer.position;
         transform.SetParent(nearestPlayer);
+        //把体力条移到最近的球员身上
+        power.transform.position = nearestPlayer.position;
+        power.transform.SetParent(nearestPlayer);
+        power.transform.localEulerAngles = new Vector3(power.transform.localEulerAngles.x, -90, power.transform.localEulerAngles.z);
     }
     //箭头指向足球
     void ArrowToBall(Transform player)

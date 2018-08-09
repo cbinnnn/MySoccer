@@ -12,7 +12,7 @@ public class MyCamera : MonoBehaviour {
     };
     private float smoothing = 5;//镜头灵敏度
     private Vector3 offset;//镜头与跟随物的偏移量
-    private Vector3 endPos;//镜头要到达的位置
+    public Vector3 endPos;//镜头要到达的位置
 	void Start () {
             offset = transform.position - Vector3.zero;//默认偏移量
     }
