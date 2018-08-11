@@ -13,49 +13,55 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: Shoot
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Run
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Pass
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Win
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Lose
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Alert
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: power
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
+  - m_Name: Shoot
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: BigShoot
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -280,8 +286,8 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.19814849
-  m_TransitionOffset: 0.1555555
+  m_TransitionDuration: 0.26223403
+  m_TransitionOffset: 0.15555553
   m_ExitTime: 0.8473908
   m_HasExitTime: 0
   m_HasFixedDuration: 1
@@ -836,13 +842,13 @@ AnimatorStateMachine:
     m_Position: {x: 336, y: 72, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102125916319314034}
-    m_Position: {x: 228, y: -72, z: 0}
+    m_Position: {x: 444, y: -216, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102915105326709708}
     m_Position: {x: 528, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102445489239469932}
-    m_Position: {x: -48, y: -72, z: 0}
+    m_Position: {x: -24, y: -72, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102084353153263428}
     m_Position: {x: 216, y: -264, z: 0}

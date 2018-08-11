@@ -21,13 +21,13 @@ public class Player : MonoBehaviour {
     private Rigidbody rgd;
     private float speed;//初始移动速度
     public float upSpeed;//加速后速度
+    public float timer;
 	void Start () {
         rgd = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
     }
     private void FixedUpdate()
     {
-        
         if (isSelected)//如果被选中的话
         {
             h = Input.GetAxisRaw("Horizontal");
@@ -75,7 +75,6 @@ public class Player : MonoBehaviour {
                 //恢复默认速度
                 PowerToSpeed();
             }
-            Debug.Log(speed);
         }
         else
         {
@@ -106,20 +105,57 @@ public class Player : MonoBehaviour {
     //射门
     void Shoot()
     {
-        if (Input.GetMouseButtonDown(0)&&playerState==PlayerState.HOLDING)//玩家处于持球状态时点击射门
+        if (Input.GetMouseButtonDown(0) && playerState == PlayerState.HOLDING)
         {
-            animator.SetBool("Shoot", true);
-            AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.kick);
             transform.LookAt(goal.transform);//玩家面向球门
+            timer = 0;
+        }
+        if (Input.GetMouseButton(0) && playerState == PlayerState.HOLDING)
+        {
+            //蓄力力度计算，最大为10
+            if (timer < 10)
+            {
+                    timer += Time.deltaTime * 22;
+            }
+            else
+            {
+                timer = 10;
+                animator.SetTrigger("Shoot");
+                AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.kick);
+                Vector3 goalDir = (goal.transform.position - (transform.position + new Vector3(Random.Range(-15f, 15f), 0, 0))).normalized;//球门方向,往左右偏移量随机
+                GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward * 1.4f);//球脱离过近距离
+                Vector3 vector3 = (goalDir + transform.forward);
+                vector3.z = -24;
+                vector3.y = -vector3.z * 0.35f;
+                GameManager.Instance.ballRgd.velocity = vector3;
+                Invoke("Zero", 1.5f);
+            }
+            Debug.Log(timer);
+        }
+        if (Input.GetMouseButtonUp(0)&&playerState==PlayerState.HOLDING)//玩家处于持球状态时点击射门
+        {
+            animator.SetTrigger("Shoot");
+            AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.kick);           
             Vector3 goalDir = (goal.transform.position - (transform.position+new Vector3(Random.Range(-15f,15f),0,0))).normalized;//球门方向,往左右偏移量随机
                 GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward*1.4f);//球脱离过近距离
-                Vector3 vector3 = (goalDir+transform.forward)* 12;
-                vector3.y = 7f;
+                Vector3 vector3 = (goalDir+transform.forward);
+            //球速与蓄力时间有关
+            if (timer/10 <0.33f)
+            {
+                vector3.z = -8-timer;
+                
+            }
+            else if (timer/10 < 0.66f)
+            {
+                vector3.z = -12  -timer;
+            }
+            else
+            {
+                vector3.z = -14 - timer;
+            }
+                vector3.y = -vector3.z*0.35f;
                 GameManager.Instance.ballRgd.velocity = vector3;
-        }
-        else
-        {
-            animator.SetBool("Shoot", false);
+            Invoke("Zero", 1.5f);
         }
     }
     //传球
@@ -175,5 +211,9 @@ public class Player : MonoBehaviour {
         {
             power = 100;
         }
+    }
+    void Zero()
+    {
+        timer = 0;
     }
 }

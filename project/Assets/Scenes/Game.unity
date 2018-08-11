@@ -630,6 +630,7 @@ MonoBehaviour:
   goal: {fileID: 1670842056}
   animator: {fileID: 0}
   upSpeed: 0
+  timer: 0
 --- !u!136 &66054207
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4454,6 +4455,89 @@ Transform:
   m_Father: {fileID: 895433009}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &797519441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 797519442}
+  - component: {fileID: 797519443}
+  m_Layer: 0
+  m_Name: ShootSlider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &797519442
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 797519441}
+  m_LocalRotation: {x: 0.3402497, y: 0.000068932764, z: -0.000061511986, w: 0.94033515}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.02, y: 0.03, z: 1}
+  m_Children:
+  - {fileID: 1517655066}
+  m_Father: {fileID: 1864679578}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 39.784, y: 0.007, z: -0.0050000004}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.11, y: 4.02}
+  m_SizeDelta: {x: 160, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &797519443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 797519441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_FillRect: {fileID: 1618367685}
+  m_HandleRect: {fileID: 0}
+  m_Direction: 0
+  m_MinValue: 0
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 1
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &802953156
 GameObject:
   m_ObjectHideFlags: 0
@@ -4463,7 +4547,6 @@ GameObject:
   m_Component:
   - component: {fileID: 802953157}
   - component: {fileID: 802953159}
-  - component: {fileID: 802953158}
   m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
@@ -4488,19 +4571,8 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.00000017210868, y: 3.59}
-  m_SizeDelta: {x: 160, y: 20}
+  m_SizeDelta: {x: 160, y: 23.7157}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &802953158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 802953156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3533e379edf10974f9a8482f20cc7284, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &802953159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4985,6 +5057,7 @@ MonoBehaviour:
   goal: {fileID: 1670842056}
   animator: {fileID: 0}
   upSpeed: 0
+  timer: 0
 --- !u!136 &897427093
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6668,6 +6741,7 @@ MonoBehaviour:
   goal: {fileID: 1670842056}
   animator: {fileID: 0}
   upSpeed: 0
+  timer: 0
 --- !u!136 &1324514649
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7366,6 +7440,40 @@ Transform:
   m_Father: {fileID: 1415490815}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1517655065
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1517655066}
+  m_Layer: 0
+  m_Name: Fill Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1517655066
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1517655065}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1618367685}
+  m_Father: {fileID: 797519442}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.25}
+  m_AnchorMax: {x: 1, y: 0.75}
+  m_AnchoredPosition: {x: -5, y: 0}
+  m_SizeDelta: {x: -20, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1518541843
 GameObject:
   m_ObjectHideFlags: 0
@@ -7650,6 +7758,7 @@ MonoBehaviour:
   goal: {fileID: 1670842056}
   animator: {fileID: 0}
   upSpeed: 0
+  timer: 0
 --- !u!136 &1537628089
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8107,6 +8216,75 @@ Transform:
   m_Father: {fileID: 187316216}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1618367684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1618367685}
+  - component: {fileID: 1618367687}
+  - component: {fileID: 1618367686}
+  m_Layer: 0
+  m_Name: Fill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1618367685
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1618367684}
+  m_LocalRotation: {x: 0.0010993776, y: 0.00000015586552, z: -0.00000011845984, w: 0.9999994}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0000023844}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1517655066}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0.126, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 5, y: 0.000006198883}
+  m_SizeDelta: {x: 10, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1618367686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1618367684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 13af914df2a88e04cafd72026d4691e1, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1618367687
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1618367684}
+  m_CullTransparentMesh: 0
 --- !u!1 &1621660882
 GameObject:
   m_ObjectHideFlags: 0
@@ -8332,6 +8510,7 @@ MonoBehaviour:
   goal: {fileID: 1670842056}
   animator: {fileID: 0}
   upSpeed: 0
+  timer: 0
 --- !u!136 &1650148173
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8924,6 +9103,7 @@ GameObject:
   - component: {fileID: 1864679581}
   - component: {fileID: 1864679580}
   - component: {fileID: 1864679579}
+  - component: {fileID: 1864679582}
   m_Layer: 0
   m_Name: Power
   m_TagString: Untagged
@@ -8942,6 +9122,7 @@ RectTransform:
   m_LocalScale: {x: 0.6060598, y: 0.6060606, z: 0.60606}
   m_Children:
   - {fileID: 802953157}
+  - {fileID: 797519442}
   m_Father: {fileID: 897427089}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -9007,6 +9188,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1864679582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1864679577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd2ea38ecedbbf4f93a656dc5593154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerSlider: {fileID: 802953159}
+  shootSlider: {fileID: 797519443}
 --- !u!1 &1866900191
 GameObject:
   m_ObjectHideFlags: 0
