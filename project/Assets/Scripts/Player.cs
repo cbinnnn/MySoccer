@@ -130,7 +130,6 @@ public class Player : MonoBehaviour {
                 GameManager.Instance.ballRgd.velocity = vector3;
                 Invoke("Zero", 1.5f);
             }
-            Debug.Log(timer);
         }
         if (Input.GetMouseButtonUp(0)&&playerState==PlayerState.HOLDING)//玩家处于持球状态时点击射门
         {
@@ -140,12 +139,12 @@ public class Player : MonoBehaviour {
                 GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward*1.4f);//球脱离过近距离
                 Vector3 vector3 = (goalDir+transform.forward);
             //球速与蓄力时间有关
-            if (timer/10 <0.33f)
+            if (timer <3.3f)
             {
                 vector3.z = -8-timer;
                 
             }
-            else if (timer/10 < 0.66f)
+            else if (timer < 6.6f)
             {
                 vector3.z = -12  -timer;
             }
@@ -161,18 +160,50 @@ public class Player : MonoBehaviour {
     //传球
     void Pass()
     {
-        if (playerState == PlayerState.HOLDING && Input.GetKeyDown(KeyCode.S))//持球状态下按下S
+        if (Input.GetKeyDown(KeyCode.S) && playerState == PlayerState.HOLDING)
         {
-            transform.LookAt(passPlayer);//面向接球者
-            animator.SetBool("Pass", true);//动画状态机
+            transform.LookAt(passPlayer);//玩家面向接球者
+            timer = 0;
+        }
+        if (Input.GetKey(KeyCode.S) && playerState == PlayerState.HOLDING)
+        {
+            //蓄力力度计算，最大为10
+            if (timer < 10)
+            {
+                timer += Time.deltaTime * 22;
+            }
+            else
+            {
+                timer = 10;
+                animator.SetTrigger("Pass");
+                AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.kick);
+                GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward * 2f);//球脱离过近距离
+                GameManager.Instance.ballRgd.velocity = (passPlayer.position - transform.position).normalized * 25;//传球速度
+                Invoke("Zero", 1.5f);
+            }
+        }
+        if (playerState == PlayerState.HOLDING && Input.GetKeyUp(KeyCode.S))//持球状态下按下S
+        {
+            float passSpeed;
+            animator.SetTrigger("Pass");
             AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.kick);
             GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward * 2f);//球脱离过近距离
-            GameManager.Instance.ballRgd.velocity = (passPlayer.position - transform.position).normalized * 25;//传球速度
-        }
-        else
-        {
-            //动画状态机
-            animator.SetBool("Pass", false);
+            //球速与蓄力时间有关
+            if (timer < 3.3f)
+            {
+                passSpeed = 10 + timer;
+
+            }
+            else if (timer < 6.6f)
+            {
+                passSpeed = 12 + timer;
+            }
+            else
+            {
+                passSpeed = 14 + timer;
+            }
+            GameManager.Instance.ballRgd.velocity = (passPlayer.position - transform.position).normalized * passSpeed;//传球速度
+            Invoke("Zero", 1.5f);
         }
     }
     void PowerToSpeed()//体力与速度的对应

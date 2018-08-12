@@ -199,7 +199,7 @@ public class Selceted : MonoBehaviour {
         for(int i = 0; i < players.Length; i++)
         {
             //与自己角度越小的球员就越适合
-            if(Vector3.Angle(self.forward,players[i].position-self.position)* Mathf.Sign(Vector3.Cross(self.forward, players[i].position - self.position).y) < Vector3.Angle(self.forward, minAnglePlayer.position - self.position) * Mathf.Sign(Vector3.Cross(self.forward, minAnglePlayer.position - self.position).y))
+            if(Vector3.Angle(self.forward,players[i].position-self.position) < Vector3.Angle(self.forward, minAnglePlayer.position - self.position))
             {
                 minAnglePlayer = players[i];
             }
