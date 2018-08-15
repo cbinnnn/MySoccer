@@ -43,7 +43,6 @@ public class GoalKeeper : MonoBehaviour {
                 }                   
             }
             goalKeeperRgd.MovePosition(Vector3.Lerp(goalKeeperRgd.position, targetPos, 0.5f));
-            Debug.Log(goalKeeperRgd.position);
         }
         if (other.tag == "Ball" && transform.name == "Team1Trigger")
         {

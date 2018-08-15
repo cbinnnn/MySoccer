@@ -16,7 +16,7 @@ public class Player : MonoBehaviour {
     private static float h;
     private static float v;
     public GameObject goal;//球门
-    private static  Vector3 movement;//移动方向
+    public  Vector3 movement;//移动方向
     public Animator animator;
     private Rigidbody rgd;
     private float speed;//初始移动速度
@@ -39,9 +39,15 @@ public class Player : MonoBehaviour {
         }
         else
         {
-            
-            animator.SetBool("Walk", false);
-            animator.SetBool("Run", false);
+            if (GameManager.Instance.State())
+            {
+                playerState = PlayerState.ATTACK;
+            }
+            else
+            {
+                playerState = PlayerState.DEFENCE;
+            }
+            AI();
             float distance = Vector3.Distance(transform.position, GameManager.Instance.insBall.transform.position);//球和玩家的距离
             if (distance < 1.3f)//判断是否被传球
             {
@@ -52,17 +58,17 @@ public class Player : MonoBehaviour {
     }
     //移动控制
     void PlayerMove(float h,float v)
-    {
-        
+    {        
         movement =new Vector3(v, 0, -h); //获得移动方向
         if (movement != Vector3.zero)
         {          
             if (Input.GetKey(KeyCode.E))//按下E键加速
             {
-                MinusPower();
                 //动画状态机
+                animator.SetBool("Alert", false);
                 animator.SetBool("Walk", false);
-                animator.SetBool("Run", true);
+                animator.SetBool("Run",true);
+                MinusPower();                            
                 //加速后速度
                 speed = Mathf.Lerp(speed,upSpeed,Time.deltaTime*2);
             }
@@ -70,8 +76,9 @@ public class Player : MonoBehaviour {
             else
             {
                 //动画状态机
+                animator.SetBool("Alert", false);
+                animator.SetBool("Walk",true);
                 animator.SetBool("Run", false);
-                animator.SetBool("Walk", true);
                 //恢复默认速度
                 PowerToSpeed();
             }
@@ -80,10 +87,10 @@ public class Player : MonoBehaviour {
         {
             RePower();
             //动画状态机
+            animator.SetBool("Alert",true);
             animator.SetBool("Walk", false);
             animator.SetBool("Run", false);
-        }
-        
+        }        
         movement = movement.normalized * speed * Time.deltaTime; //movement.normalized使向量单位化，结果等于每帧角色移动的距离
         rgd.MovePosition(transform.position + movement);//移动
         transform.LookAt(transform.position+movement);  //面向前进的方向   
@@ -95,7 +102,7 @@ public class Player : MonoBehaviour {
         if (distance<1.3f)//距离过近
         {
             playerState = PlayerState.HOLDING;//玩家切换进攻状态
-                GameManager.Instance.ballRgd.MovePosition(Vector3.Lerp(GameManager.Instance.ballRgd.position, transform.position + transform.forward * 1,Time.deltaTime*15));//球始终处于玩家前方
+            GameManager.Instance.ballRgd.MovePosition(Vector3.Lerp(GameManager.Instance.ballRgd.position, transform.position + transform.forward * 1,Time.deltaTime*15));//球始终处于玩家前方
         }
         else
         {
@@ -122,7 +129,7 @@ public class Player : MonoBehaviour {
                 timer = 10;
                 animator.SetTrigger("Shoot");
                 AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.kick);
-                Vector3 goalDir = (goal.transform.position - (transform.position + new Vector3(Random.Range(-15f, 15f), 0, 0))).normalized;//球门方向,往左右偏移量随机
+                Vector3 goalDir = (goal.transform.position - (transform.position + new Vector3(Random.Range(-10f, 10f), 0, 0))).normalized;//球门方向,往左右偏移量随机
                 GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward * 1.4f);//球脱离过近距离
                 Vector3 vector3 = (goalDir + transform.forward);
                 vector3.z = -24;
@@ -135,9 +142,9 @@ public class Player : MonoBehaviour {
         {
             animator.SetTrigger("Shoot");
             AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.kick);           
-            Vector3 goalDir = (goal.transform.position - (transform.position+new Vector3(Random.Range(-15f,15f),0,0))).normalized;//球门方向,往左右偏移量随机
-                GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward*1.4f);//球脱离过近距离
-                Vector3 vector3 = (goalDir+transform.forward);
+            Vector3 goalDir = (goal.transform.position - (transform.position+new Vector3(Random.Range(-10f,10f),0,0))).normalized;//球门方向,往左右偏移量随机
+            GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward*1.4f);//球脱离过近距离
+            Vector3 vector3 = (goalDir+transform.forward);
             //球速与蓄力时间有关
             if (timer <3.3f)
             {
@@ -152,8 +159,8 @@ public class Player : MonoBehaviour {
             {
                 vector3.z = -14 - timer;
             }
-                vector3.y = -vector3.z*0.35f;
-                GameManager.Instance.ballRgd.velocity = vector3;
+            vector3.y = -vector3.z*0.35f;
+            GameManager.Instance.ballRgd.velocity = vector3;
             Invoke("Zero", 1.5f);
         }
     }
@@ -246,5 +253,38 @@ public class Player : MonoBehaviour {
     void Zero()
     {
         timer = 0;
+    }
+    void AI()
+    {
+        if (playerState == PlayerState.ATTACK&&transform.name=="CenterForward")
+        {
+            animator.SetBool("Alert", false);
+            animator.SetBool("Walk", false);
+            animator.SetBool("Run",true);                                   
+        }
+        if (playerState == PlayerState.ATTACK && transform.name == "RightForward")
+        {
+            animator.SetBool("Alert", false);
+            animator.SetBool("Walk", false);
+            animator.SetBool("Run", true);
+        }
+        if (playerState == PlayerState.ATTACK && transform.name == "LeftForward")
+        {
+            animator.SetBool("Alert", false);
+            animator.SetBool("Walk", false);
+            animator.SetBool("Run", true);
+        }
+        if (playerState == PlayerState.ATTACK && transform.name == "RightGuard")
+        {
+            animator.SetBool("Alert", false);
+            animator.SetBool("Walk", false);
+            animator.SetBool("Run", true);
+        }
+        if (playerState == PlayerState.ATTACK && transform.name == "LeftGuard")
+        {
+            animator.SetBool("Alert", false);
+            animator.SetBool("Walk", false);
+            animator.SetBool("Run", true);
+        }
     }
 }

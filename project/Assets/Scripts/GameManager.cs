@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour {
     public Transform Player3;
     public Transform Player4;
     public Transform Player5;
+    public Player player1Script;
+    public Player player2Script;
+    public Player player3Script;
+    public Player player4Script;
+    private Player player5Script;
     public Transform GoalKeeper;
     public Transform Opponent1;
     public Transform Opponent2;
@@ -52,7 +57,7 @@ public class GameManager : MonoBehaviour {
     public GameObject insBall;
     public GameObject ball;
     private static GameManager _instance;
-    public  static GameManager Instance
+    public static GameManager Instance
     {
         get
         {
@@ -62,16 +67,21 @@ public class GameManager : MonoBehaviour {
     private void Awake()
     {
         _instance = this;
- //       team1 = Resources.Load("Team1") as GameObject;
- //       Instantiate(team1);
- //       map = Resources.Load("NewCity") as GameObject;
-//        Instantiate(map);
+        //       team1 = Resources.Load("Team1") as GameObject;
+        //       Instantiate(team1);
+        //       map = Resources.Load("NewCity") as GameObject;
+        //        Instantiate(map);
     }
     // Use this for initialization
-    void Start () {
+    void Start() {
         BallIns();
         timeSpend = 0;
         //取得球员身上的脚本
+        player1Script = Player1.GetComponent<Player>();
+        player2Script = Player2.GetComponent<Player>();
+        player3Script = Player3.GetComponent<Player>();
+        player4Script = Player4.GetComponent<Player>();
+        player5Script = Player5.GetComponent<Player>();
         player1Animator = Player1.GetComponent<Animator>();
         player2Animator = Player2.GetComponent<Animator>();
         player3Animator = Player3.GetComponent<Animator>();
@@ -91,7 +101,7 @@ public class GameManager : MonoBehaviour {
     }
     private void BallIns()
     {
-        insBall=Instantiate(ball);//实例化足球
+        insBall = Instantiate(ball);//实例化足球
         ballRgd = insBall.GetComponent<Rigidbody>();//获取足球上的刚体组件
     }
     void MatchTime()
@@ -148,5 +158,32 @@ public class GameManager : MonoBehaviour {
         opponent4Animator.SetTrigger("Alert");
         opponent5Animator.SetTrigger("Alert");
         opponentGoalKeeperAnimator.SetTrigger("Alert");
+    }
+    public bool State()
+    {
+        if (player1Script.playerState == Player.PlayerState.HOLDING)
+        {
+            return true;
+        }
+        else if(player2Script.playerState==Player.PlayerState.HOLDING)
+        {
+            return true;
+        }
+        else if (player3Script.playerState == Player.PlayerState.HOLDING)
+        {
+            return true;
+        }
+        else if (player4Script.playerState == Player.PlayerState.HOLDING)
+        {
+            return true;
+        }
+        else if (player5Script.playerState == Player.PlayerState.HOLDING)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

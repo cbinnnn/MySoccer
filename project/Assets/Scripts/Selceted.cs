@@ -36,7 +36,7 @@ public class Selceted : MonoBehaviour {
             //箭头始终朝向足球
             ArrowToBall(Player1);
             
-            if (player1Script.playerState == Player.PlayerState.DEFENCE)//如果处于防守状态
+            if (player1Script.playerState != Player.PlayerState.HOLDING)//如果处于防守状态
             {
                 if (Input.GetKeyDown(KeyCode.S))//按切换
                 {
@@ -54,7 +54,7 @@ public class Selceted : MonoBehaviour {
 
             ArrowToBall(Player2);
 
-            if (player2Script.playerState == Player.PlayerState.DEFENCE)
+            if (player2Script.playerState != Player.PlayerState.HOLDING)
             {
                 if (Input.GetKeyDown(KeyCode.S))
                 {
@@ -72,7 +72,7 @@ public class Selceted : MonoBehaviour {
 
             ArrowToBall(Player3);
 
-            if (player3Script.playerState == Player.PlayerState.DEFENCE)
+            if (player3Script.playerState != Player.PlayerState.HOLDING)
             {
                 if (Input.GetKeyDown(KeyCode.S))
                 {
@@ -90,7 +90,7 @@ public class Selceted : MonoBehaviour {
 
             ArrowToBall(Player4);
 
-            if (player4Script.playerState == Player.PlayerState.DEFENCE)
+            if (player4Script.playerState != Player.PlayerState.HOLDING)
             {
                 if (Input.GetKeyDown(KeyCode.S))
                 {
@@ -108,7 +108,7 @@ public class Selceted : MonoBehaviour {
 
             ArrowToBall(Player5);
 
-            if (player5Script.playerState == Player.PlayerState.DEFENCE)
+            if (player5Script.playerState != Player.PlayerState.HOLDING)
             {
                 if (Input.GetKeyDown(KeyCode.S))
                 {
