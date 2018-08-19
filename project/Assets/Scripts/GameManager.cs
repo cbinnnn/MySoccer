@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
     public Player player2Script;
     public Player player3Script;
     public Player player4Script;
-    private Player player5Script;
+    public Player player5Script;
     public Transform GoalKeeper;
     public Transform Opponent1;
     public Transform Opponent2;
@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour {
     }
     private void BallIns()
     {
-        insBall = Instantiate(ball);//实例化足球
+        insBall = Instantiate(ball,BallRandom(),Quaternion.identity);//实例化足球
         ballRgd = insBall.GetComponent<Rigidbody>();//获取足球上的刚体组件
     }
     void MatchTime()
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour {
         timeSpend += Time.deltaTime;
         // GlobalSetting.timeSpent = timeSpend;
 
-        minute = ((int)timeSpend) / 60;
+        minute = (int)timeSpend / 60;
         second = (int)timeSpend - minute * 60;
 
         timeText.text = string.Format("{0:D2}:{1:D2}", minute, second);
@@ -119,9 +119,22 @@ public class GameManager : MonoBehaviour {
         yield return new WaitForSeconds(3);
         PositionReset();
     }
+    Vector3 BallRandom()
+    {
+        Vector3 ballRandom;
+        if (Random.Range(0, 1) == 0)
+        {
+            ballRandom = new Vector3(0, 0, 7);
+        }
+        else
+        {
+            ballRandom = new Vector3(0, 0, -7);
+        }
+        return ballRandom;
+    }
     private void PositionReset()
     {
-        insBall.transform.position = new Vector3(0, 0, 0);
+        insBall.transform.position = BallRandom();
         Player1.position = position1.position;
         Player1.rotation = position1.rotation;
         Player2.position = position2.position;
@@ -159,7 +172,7 @@ public class GameManager : MonoBehaviour {
         opponent5Animator.SetTrigger("Alert");
         opponentGoalKeeperAnimator.SetTrigger("Alert");
     }
-    public bool State()
+    public bool AttackState()
     {
         if (player1Script.playerState == Player.PlayerState.HOLDING)
         {
@@ -185,5 +198,23 @@ public class GameManager : MonoBehaviour {
         {
             return false;
         }
+    }
+    public bool DefenseState()
+    {
+        return false;
+    }
+    public Transform DefensePlayer()
+    {
+        Transform defensePlayer = Player1;
+        Transform[] players = { Player2, Player3, Player4, Player5 };
+        for (int i = 0; i < players.Length; i++)
+        {
+            //找出与足球距离最近的球员
+            if (Vector3.Distance(insBall.transform.position, players[i].position) < Vector3.Distance(insBall.transform.position, defensePlayer.position))
+            {
+                defensePlayer = players[i];
+            }
+        }
+        return defensePlayer;
     }
 }

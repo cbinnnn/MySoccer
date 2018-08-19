@@ -7,6 +7,7 @@ public class ShootPower : MonoBehaviour {
     public Slider powerSlider;
     public Slider shootSlider;
     private Player playerScript;
+    private Vector3 vector3;
     // Update is called once per frame
     void Update () {
         playerScript = transform.parent.GetComponent<Player>();
@@ -14,7 +15,7 @@ public class ShootPower : MonoBehaviour {
         shootSlider.value = playerScript.timer / 10;
         Power();
         //保持一直正对着屏幕
-        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 90 - transform.parent.localEulerAngles.y, transform.localEulerAngles.z);
+       transform.eulerAngles = new Vector3(transform.parent.eulerAngles.x, 90, transform.parent.eulerAngles.z);
     }
     void Power()
     {
