@@ -13,7 +13,7 @@ public class SettingPanel : MonoBehaviour {
     public Text cameraSetting;
     public Slider bgmSlider;
     public Slider audioSlider;
-    private void Awake()
+    private void Start()
     {
         oldBgmVolume = AudioManager.Instance.audioSources[1].volume;
         oldAudioVolume = AudioManager.Instance.audioSources[0].volume;

@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: boot
+  m_Name: boot 1
   m_Shader: {fileID: 4800000, guid: b8ebd87d46bc24a68863010b67d5f8e8, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -32,8 +32,8 @@ Material:
     - _Shininess: 10
     - _UnlitOutlineThickness: 0.4
     m_Colors:
-    - _Color: {r: 0.72676784, g: 1, b: 0.09411764, a: 1}
+    - _Color: {r: 1, g: 0.09411764, b: 0.5442956, a: 1}
     - _DetailColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
-    - _UnlitColor: {r: 0.7715219, g: 0.9485294, b: 0.14646412, a: 1}
+    - _UnlitColor: {r: 0.01886791, g: 0.01886791, b: 0.01886791, a: 1}

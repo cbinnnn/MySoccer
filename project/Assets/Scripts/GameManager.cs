@@ -15,6 +15,12 @@ public class GameManager : MonoBehaviour {
     public Player player3Script;
     public Player player4Script;
     public Player player5Script;
+    public GameObject[] players;
+    public GameObject[] oppoPlayers;
+    public Material[] team1Materials;
+    public Material[] team2Materials;
+    public Material[] team3Materials;
+    private SkinnedMeshRenderer[] skms;
     public Transform GoalKeeper;
     public Transform Opponent1;
     public Transform Opponent2;
@@ -94,6 +100,55 @@ public class GameManager : MonoBehaviour {
         opponent4Animator = Opponent4.GetComponent<Animator>();
         opponent5Animator = Opponent5.GetComponent<Animator>();
         opponentGoalKeeperAnimator = OpponentGoalKeeper.GetComponent<Animator>();
+        skms = new SkinnedMeshRenderer[players.Length];
+        if (PlayerPrefs.GetInt("Team") == 0)
+        {
+            for (int i = 0; i < players.Length; i++)
+            {
+                skms[i] = players[i].GetComponent<SkinnedMeshRenderer>();
+                skms[i].materials = team1Materials;
+            }
+        }
+        if (PlayerPrefs.GetInt("Team") == 1)
+        {
+            for (int i = 0; i < players.Length; i++)
+            {
+                skms[i] = players[i].GetComponent<SkinnedMeshRenderer>();
+                skms[i].materials = team2Materials;
+            }
+        }
+        if (PlayerPrefs.GetInt("Team") == 2)
+        {
+            for (int i = 0; i < players.Length; i++)
+            {
+                skms[i] = players[i].GetComponent<SkinnedMeshRenderer>();
+                skms[i].materials = team3Materials;
+            }
+        }
+        if (PlayerPrefs.GetInt("Oppo") == 0)
+        {
+            for (int i = 0; i < oppoPlayers.Length; i++)
+            {
+                skms[i] = oppoPlayers[i].GetComponent<SkinnedMeshRenderer>();
+                skms[i].materials = team1Materials;
+            }
+        }
+        if (PlayerPrefs.GetInt("Oppo") == 1)
+        {
+            for (int i = 0; i < oppoPlayers.Length; i++)
+            {
+                skms[i] = oppoPlayers[i].GetComponent<SkinnedMeshRenderer>();
+                skms[i].materials = team2Materials;
+            }
+        }
+        if (PlayerPrefs.GetInt("Oppo") == 2)
+        {
+            for (int i = 0; i < oppoPlayers.Length; i++)
+            {
+                skms[i] = oppoPlayers[i].GetComponent<SkinnedMeshRenderer>();
+                skms[i].materials = team3Materials;
+            }
+        }
     }
     private void FixedUpdate()
     {

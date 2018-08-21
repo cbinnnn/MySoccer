@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: boot
+  m_Name: skin 1
   m_Shader: {fileID: 4800000, guid: b8ebd87d46bc24a68863010b67d5f8e8, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -27,13 +27,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _DiffuseThreshold: 0.32142857
+    - _DiffuseThreshold: 0.1
     - _LitOutlineThickness: 0.1
     - _Shininess: 10
     - _UnlitOutlineThickness: 0.4
     m_Colors:
-    - _Color: {r: 0.72676784, g: 1, b: 0.09411764, a: 1}
-    - _DetailColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.9433962, g: 0.9350631, b: 0.91224635, a: 1}
+    - _DetailColor: {r: 0.9705882, g: 0.7126834, b: 0.035683367, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
-    - _UnlitColor: {r: 0.7715219, g: 0.9485294, b: 0.14646412, a: 1}
+    - _UnlitColor: {r: 0.8207547, g: 0.8072908, b: 0.7704254, a: 1}

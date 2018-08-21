@@ -1,0 +1,18 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DontDestroyOnLoad : MonoBehaviour {
+
+    public static bool isClone;
+    public GameObject obj;
+    private GameObject cloneObj;
+    void Awake()
+    {
+        if (!isClone)
+        {
+            cloneObj = Instantiate(obj);
+            isClone = true;
+        }
+    }
+}

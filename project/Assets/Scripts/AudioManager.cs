@@ -14,17 +14,21 @@ public class AudioManager : MonoBehaviour {
     {
         get
         {
+            if (_instance == null)
+            {
+                _instance = new AudioManager();
+            }
             return _instance;
         }
     }
     private void Awake()
-    {
-        _instance = this;
+    {       
+            _instance = this;
+        DontDestroyOnLoad(this);
     }
     // Use this for initialization
     void Start () {
         audioSources = GetComponents<AudioSource>();
-        audioSources[1].Play();
-        
+        audioSources[1].Play();        
     }
 }

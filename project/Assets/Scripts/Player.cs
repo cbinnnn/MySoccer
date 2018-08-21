@@ -36,7 +36,6 @@ public class Player : MonoBehaviour {
             PlayerMove(h, v);
             Pass();
             Shoot();
-            Debug.Log(transform.position);
         }
         else
         {
@@ -124,10 +123,10 @@ public class Player : MonoBehaviour {
                 timer = 10;
                 animator.SetTrigger("Shoot");
                 AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.kick);
-                Vector3 goalDir = (goal.transform.position - (transform.position + new Vector3(Random.Range(-6f, 6f), 0, 0))).normalized;//球门方向,往左右偏移量随机
+                Vector3 goalDir = (goal.transform.position - (transform.position+new Vector3(Random.Range(-8f,8f),0,0))).normalized;//球门方向,往左右偏移量随机
                 GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward * 1.4f);//球脱离过近距离
-                Vector3 vector3 = (goalDir + transform.forward);
-                vector3.z = -24;
+                Vector3 vector3 = (goalDir+transform.forward);
+                vector3*= 14;
                 vector3.y = -vector3.z * 0.35f;
                 GameManager.Instance.ballRgd.velocity = vector3;
                 Invoke("Zero", 1.5f);
@@ -137,22 +136,22 @@ public class Player : MonoBehaviour {
         {
             animator.SetTrigger("Shoot");
             AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.kick);           
-            Vector3 goalDir = (goal.transform.position - (transform.position+new Vector3(Random.Range(-10f,10f),0,0))).normalized;//球门方向,往左右偏移量随机
+            Vector3 goalDir = (goal.transform.position - (transform.position)).normalized;//球门方向,往左右偏移量随机
             GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward*1.4f);//球脱离过近距离
             Vector3 vector3 = (goalDir+transform.forward);
             //球速与蓄力时间有关
             if (timer <3.3f)
             {
-                vector3.z = -8-timer;
+                vector3*= 3+timer;
                 
             }
             else if (timer < 6.6f)
             {
-                vector3.z = -12  -timer;
+                vector3*= 3.5f+timer;
             }
             else
             {
-                vector3.z = -14 - timer;
+                vector3*= 4 + timer;
             }
             vector3.y = -vector3.z*0.35f;
             GameManager.Instance.ballRgd.velocity = vector3;

@@ -7,7 +7,8 @@ public class ComfirmPanel : MonoBehaviour {
 
 	public void ClickYes()
     {
-        SceneManager.LoadScene("Menu");
+        AudioManager.Instance.audioSources[0].Stop();
+        SceneManager.LoadScene("Menu");      
     }
     public void ClickNo()
     {

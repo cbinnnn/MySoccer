@@ -9,9 +9,6 @@ public class SatrtBtn : MonoBehaviour {
 	public void ClickStartBtn()
     {
         MyCamera.nowCamera = CameraSetting.cameraFollow[CameraSetting.nowIndex];
-        AudioManager.Instance.audioSources[0].Play();
-        DontDestroyOnLoad(AudioManager.Instance);
-        SceneManager.LoadScene("Game");
-        
+        SceneManager.LoadScene("Select");        
     }
 }
