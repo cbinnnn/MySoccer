@@ -124,7 +124,9 @@ public class TeamCreation : MonoBehaviour {
             PlayerPrefs.SetInt("Team", teamSelectIndex);
             PlayerPrefs.SetInt("Oppo", oppoSelectIndex);
             AudioManager.Instance.audioSources[0].Play();
-            SceneManager.LoadScene("Game");
+            Globe.nextSceneName = "Game";
+            SceneManager.LoadScene("Loading");
+            Time.timeScale = 1;
         }
         else
         {
