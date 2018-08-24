@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour {
     public float power=100;//默认体力值
@@ -106,57 +105,61 @@ public class Player : MonoBehaviour {
     //射门
     void Shoot()
     {
-        if (Input.GetMouseButtonDown(0) && playerState == PlayerState.HOLDING)
+        if (!EventSystem.current.IsPointerOverGameObject())//UI防穿透
         {
-            transform.LookAt(goal.transform);//玩家面向球门
-            timer = 0;
-        }
-        if (Input.GetMouseButton(0) && playerState == PlayerState.HOLDING)
-        {
-            //蓄力力度计算，最大为10
-            if (timer < 10)
+            if (Input.GetMouseButtonDown(0) && playerState == PlayerState.HOLDING)
             {
-                    timer += Time.deltaTime * 22;
+                transform.LookAt(goal.transform);//玩家面向球门
+                timer = 0;
             }
-            else
+            if (Input.GetMouseButton(0) && playerState == PlayerState.HOLDING)
             {
-                timer = 10;
+                //蓄力力度计算，最大为10
+                if (timer < 10)
+                {
+                    timer += Time.deltaTime * 22;
+                }
+                else
+                {
+                    timer = 10;
+                    animator.SetTrigger("Shoot");
+                    AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.kick);
+                    Vector3 goalDir = (goal.transform.position - (transform.position + new Vector3(Random.Range(-8f, 8f), 0, 0))).normalized;//球门方向,往左右偏移量随机
+                    GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward * 1.4f);//球脱离过近距离
+                    Vector3 vector3 = (goalDir + transform.forward);
+                    vector3 *= 14;
+                    vector3.y = -vector3.z * 0.35f;
+                    GameManager.Instance.ballRgd.velocity = vector3;
+                    Invoke("Zero", 1.5f);
+                }
+            }
+            if (Input.GetMouseButtonUp(0) && playerState == PlayerState.HOLDING)//玩家处于持球状态时点击射门
+            {
                 animator.SetTrigger("Shoot");
                 AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.kick);
-                Vector3 goalDir = (goal.transform.position - (transform.position+new Vector3(Random.Range(-8f,8f),0,0))).normalized;//球门方向,往左右偏移量随机
+                Vector3 goalDir = (goal.transform.position - (transform.position)).normalized;//球门方向,往左右偏移量随机
                 GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward * 1.4f);//球脱离过近距离
-                Vector3 vector3 = (goalDir+transform.forward);
-                vector3*= 14;
+                Vector3 vector3 = (goalDir + transform.forward);
+                //球速与蓄力时间有关
+                if (timer < 3.3f)
+                {
+                    vector3 *= 3 + timer;
+
+                }
+                else if (timer < 6.6f)
+                {
+                    vector3 *= 3.5f + timer;
+                }
+                else
+                {
+                    vector3 *= 4 + timer;
+                }
                 vector3.y = -vector3.z * 0.35f;
                 GameManager.Instance.ballRgd.velocity = vector3;
                 Invoke("Zero", 1.5f);
             }
         }
-        if (Input.GetMouseButtonUp(0)&&playerState==PlayerState.HOLDING)//玩家处于持球状态时点击射门
-        {
-            animator.SetTrigger("Shoot");
-            AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.kick);           
-            Vector3 goalDir = (goal.transform.position - (transform.position)).normalized;//球门方向,往左右偏移量随机
-            GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward*1.4f);//球脱离过近距离
-            Vector3 vector3 = (goalDir+transform.forward);
-            //球速与蓄力时间有关
-            if (timer <3.3f)
-            {
-                vector3*= 3+timer;
-                
-            }
-            else if (timer < 6.6f)
-            {
-                vector3*= 3.5f+timer;
-            }
-            else
-            {
-                vector3*= 4 + timer;
-            }
-            vector3.y = -vector3.z*0.35f;
-            GameManager.Instance.ballRgd.velocity = vector3;
-            Invoke("Zero", 1.5f);
-        }
+        
     }
     //传球
     void Pass()
@@ -192,16 +195,16 @@ public class Player : MonoBehaviour {
             //球速与蓄力时间有关
             if (timer < 3.3f)
             {
-                passSpeed = 10 + timer;
+                passSpeed = 14 + timer;
 
             }
             else if (timer < 6.6f)
             {
-                passSpeed = 12 + timer;
+                passSpeed = 16 + timer;
             }
             else
             {
-                passSpeed = 14 + timer;
+                passSpeed = 18 + timer;
             }
             GameManager.Instance.ballRgd.velocity = (passPlayer.position - transform.position).normalized * passSpeed;//传球速度
             Invoke("Zero", 1.5f);
@@ -262,6 +265,11 @@ public class Player : MonoBehaviour {
                 targetPos.y = 0.2f;
                 rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
                 transform.LookAt(targetPos);
+                if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                {
+                    animator.SetBool("Alert", true);
+                    animator.SetBool("Run", false);
+                }
             }
             else if (playerState == PlayerState.DEFENCE)
             {
@@ -286,6 +294,11 @@ public class Player : MonoBehaviour {
                 {
                     rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.3f));
                     transform.LookAt(targetPos);
+                    if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                    {
+                        animator.SetBool("Alert", true);
+                        animator.SetBool("Run", false);
+                    }
                 }                
             }
         }
@@ -299,6 +312,11 @@ public class Player : MonoBehaviour {
                 Vector3 targetPos = new Vector3(-10, 0.2f, -15);
                 rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
                 transform.LookAt(targetPos);
+                if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                {
+                    animator.SetBool("Alert", true);
+                    animator.SetBool("Run", false);
+                }
             }
             else if (playerState == PlayerState.DEFENCE)
             {
@@ -323,6 +341,11 @@ public class Player : MonoBehaviour {
                 {
                     rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.3f));
                     transform.LookAt(targetPos);
+                    if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                    {
+                        animator.SetBool("Alert", true);
+                        animator.SetBool("Run", false);
+                    }
                 }                
             }
         }
@@ -336,6 +359,11 @@ public class Player : MonoBehaviour {
                 Vector3 targetPos = new Vector3(10, 0.2f, -15);
                 rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
                 transform.LookAt(targetPos);
+                if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                {
+                    animator.SetBool("Alert", true);
+                    animator.SetBool("Run", false);
+                }
             }
             else if (playerState == PlayerState.DEFENCE)
             {
@@ -360,6 +388,11 @@ public class Player : MonoBehaviour {
                 {
                     rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.3f));
                     transform.LookAt(targetPos);
+                    if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                    {
+                        animator.SetBool("Alert", true);
+                        animator.SetBool("Run", false);
+                    }
                 }                
             }
         }
@@ -375,6 +408,11 @@ public class Player : MonoBehaviour {
                 targetPos.y = 0.2f;
                 rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
                 transform.LookAt(targetPos);
+                if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                {
+                    animator.SetBool("Alert", true);
+                    animator.SetBool("Run", false);
+                }
             }
             else if (playerState == PlayerState.DEFENCE)
             {
@@ -403,6 +441,11 @@ public class Player : MonoBehaviour {
                         animator.SetBool("Run", false);
                         rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.4f));
                         transform.LookAt(-targetPos);
+                        if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                        {
+                            animator.SetBool("Alert", true);
+                            animator.SetBool("Run", false);
+                        }
                     }
                     else
                     {
@@ -410,6 +453,11 @@ public class Player : MonoBehaviour {
                         animator.SetBool("Run", true);
                         rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.4f));
                         transform.LookAt(targetPos);
+                        if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                        {
+                            animator.SetBool("Alert", true);
+                            animator.SetBool("Run", false);
+                        }
                     }
                 }               
             }
@@ -426,6 +474,11 @@ public class Player : MonoBehaviour {
                 targetPos.y = 0.2f;
                 rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
                 transform.LookAt(targetPos);
+                if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                {
+                    animator.SetBool("Alert", true);
+                    animator.SetBool("Run", false);
+                }
             }
             else if (playerState == PlayerState.DEFENCE)
             {
@@ -454,6 +507,11 @@ public class Player : MonoBehaviour {
                         animator.SetBool("Run", false);
                         rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.4f));
                         transform.LookAt(-targetPos);
+                        if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                        {
+                            animator.SetBool("Alert", true);
+                            animator.SetBool("Run", false);
+                        }
                     }
                     else
                     {
@@ -461,6 +519,11 @@ public class Player : MonoBehaviour {
                         animator.SetBool("Run", true);
                         rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.4f));
                         transform.LookAt(targetPos);
+                        if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                        {
+                            animator.SetBool("Alert", true);
+                            animator.SetBool("Run", false);
+                        }
                     }
                 }                
             }

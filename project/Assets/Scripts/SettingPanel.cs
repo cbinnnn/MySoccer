@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class SettingPanel : MonoBehaviour {
     public Toggle openBgm;
@@ -13,8 +12,18 @@ public class SettingPanel : MonoBehaviour {
     public Text cameraSetting;
     public Slider bgmSlider;
     public Slider audioSlider;
-    private void Start()
+    private RectTransform rect;
+    private Tweener tweener;
+    private void Awake()
     {
+        rect = GetComponent<RectTransform>();
+        tweener = rect.DOLocalMove(new Vector3(0, 0, 0), 1);
+        tweener.SetAutoKill(false);
+        tweener.SetUpdate(true);
+        tweener.SetEase(Ease.OutBounce);
+    }
+    private void Start()
+    {       
         oldBgmVolume = AudioManager.Instance.audioSources[1].volume;
         oldAudioVolume = AudioManager.Instance.audioSources[0].volume;
     }
@@ -33,16 +42,20 @@ public class SettingPanel : MonoBehaviour {
     }
     public void CloseSettingPanel()
     {
+        tweener.PlayBackwards();
         Time.timeScale = 1;
         AudioManager.Instance.audioSources[1].volume = oldBgmVolume;
         AudioManager.Instance.audioSources[0].volume = oldAudioVolume;
-        Destroy(this.gameObject);
+        Destroy(this.gameObject,2);
+        SettingBtn.isClone = false;
     }
 	public void OnSave()
     {
+        tweener.PlayBackwards();
         MyCamera.nowCamera = CameraSetting.cameraFollow[CameraSetting.nowIndex];
         Time.timeScale = 1;
-        Destroy(this.gameObject);
+        Destroy(this.gameObject,2);
+        SettingBtn.isClone = false;
     }
     public void Bgm()
     {

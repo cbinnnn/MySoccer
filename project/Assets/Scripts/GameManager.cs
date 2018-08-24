@@ -1,8 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     public Transform Player1;
@@ -52,7 +50,6 @@ public class GameManager : MonoBehaviour {
     public Transform position10;
     public Transform position11;
     public Transform position12;
-    public Canvas canvas;
     private GameObject team1;
     private GameObject map;
     public Text timeText;

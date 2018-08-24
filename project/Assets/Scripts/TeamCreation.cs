@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class TeamCreation : MonoBehaviour {
     public GameObject[] teamPrefabs;
@@ -17,6 +16,8 @@ public class TeamCreation : MonoBehaviour {
     private Sprite normal;
     private bool isTeamReady;
     private bool isOppoReday;
+    public Image Warning;
+    private Tweener tweener;
 	// Use this for initialization
 	void Start () {
         normal = teamReady.image.sprite;
@@ -130,7 +131,9 @@ public class TeamCreation : MonoBehaviour {
         }
         else
         {
-            Debug.Log("双方还没准备好");
+            Warning.DOFade(1, 2);
+            tweener = Warning.DOFade(0, 2);
+            tweener.SetDelay(2);
         }
     }
 }
