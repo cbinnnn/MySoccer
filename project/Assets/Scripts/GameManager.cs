@@ -3,6 +3,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
+    public ETCButton shoot;
+    public ETCButton run;
+    public ETCButton pass;
+    public ETCButton tackle;
+    public ETCButton change;
+    public static bool isShootUp;
+    public static bool isPassUp;
     public Transform Player1;
     public Transform Player2;
     public Transform Player3;
@@ -150,10 +157,11 @@ public class GameManager : MonoBehaviour {
     private void FixedUpdate()
     {
         MatchTime();
+        ControllUI();
     }
     private void BallIns()
     {
-        insBall = Instantiate(ball,BallRandom(),Quaternion.identity);//实例化足球
+        insBall = Instantiate(ball, BallRandom(), Quaternion.identity);//实例化足球
         ballRgd = insBall.GetComponent<Rigidbody>();//获取足球上的刚体组件
     }
     void MatchTime()
@@ -230,7 +238,7 @@ public class GameManager : MonoBehaviour {
         {
             return true;
         }
-        else if(player2Script.playerState==Player.PlayerState.HOLDING)
+        else if (player2Script.playerState == Player.PlayerState.HOLDING)
         {
             return true;
         }
@@ -268,5 +276,65 @@ public class GameManager : MonoBehaviour {
             }
         }
         return defensePlayer;
+    }
+    public void ShootUp()
+    {
+        if (player1Script.playerState != Player.PlayerState.HOLDING && player2Script.playerState != Player.PlayerState.HOLDING && player3Script.playerState != Player.PlayerState.HOLDING && player4Script.playerState != Player.PlayerState.HOLDING && player5Script.playerState != Player.PlayerState.HOLDING)
+        {
+            isShootUp = false;
+        }
+        else
+        {
+            isShootUp = true;
+        }
+    }
+    public void PassUp()
+    {
+        if (player1Script.playerState != Player.PlayerState.HOLDING && player2Script.playerState != Player.PlayerState.HOLDING && player3Script.playerState != Player.PlayerState.HOLDING && player4Script.playerState != Player.PlayerState.HOLDING && player5Script.playerState != Player.PlayerState.HOLDING)
+        {
+            isPassUp = false;
+        }
+        else
+        {
+            isPassUp = true;
+        }
+    }
+    void ControllUI()
+    {
+        if (player1Script.playerState == Player.PlayerState.HOLDING || player2Script.playerState == Player.PlayerState.HOLDING || player3Script.playerState == Player.PlayerState.HOLDING || player4Script.playerState == Player.PlayerState.HOLDING || player5Script.playerState == Player.PlayerState.HOLDING)
+        {
+            shoot.activated = true;
+            shoot.visible = true;
+            pass.activated = true;
+            pass.visible = true;
+            run.activated = true;
+            run.visible = true;
+            change.activated = false;
+            change.visible = false;
+        }
+        if (player1Script.playerState == Player.PlayerState.ATTACK && player2Script.playerState == Player.PlayerState.ATTACK && player3Script.playerState == Player.PlayerState.ATTACK && player4Script.playerState == Player.PlayerState.ATTACK && player5Script.playerState == Player.PlayerState.ATTACK)
+        {
+            shoot.activated = false;
+            shoot.visible = false;
+            pass.activated = false;
+            pass.visible = false;
+            run.activated = true;
+            run.visible = true;
+            change.activated = true;
+            change.visible = true;
+        }
+        if (player1Script.playerState == Player.PlayerState.DEFENCE && player2Script.playerState == Player.PlayerState.DEFENCE && player3Script.playerState == Player.PlayerState.DEFENCE && player4Script.playerState == Player.PlayerState.DEFENCE && player5Script.playerState == Player.PlayerState.DEFENCE)
+        {
+            shoot.activated = false;
+            shoot.visible = false;
+            pass.activated = false;
+            pass.visible = false;
+            run.activated = true;
+            run.visible = true;
+            change.activated = true;
+            change.visible = true;
+            tackle.activated = true;
+            tackle.visible = true;
+        }
     }
 }

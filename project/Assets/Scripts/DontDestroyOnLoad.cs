@@ -6,7 +6,7 @@ public class DontDestroyOnLoad : MonoBehaviour {
 
     public static bool isClone;
     public GameObject obj;
-    private GameObject cloneObj;
+    private GameObject cloneObj=null;
     void Awake()
     {
         if (!isClone)

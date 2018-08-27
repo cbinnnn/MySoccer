@@ -38,7 +38,7 @@ public class Selceted : MonoBehaviour {
             
             if (player1Script.playerState != Player.PlayerState.HOLDING)//如果处于防守状态
             {
-                if (Input.GetKeyDown(KeyCode.S))//按切换
+                if (ETCInput.GetButtonDown("Change"))//按切换
                 {
                     BallNearest(Player2, Player3, Player4, Player5);
                 }
@@ -56,7 +56,7 @@ public class Selceted : MonoBehaviour {
 
             if (player2Script.playerState != Player.PlayerState.HOLDING)
             {
-                if (Input.GetKeyDown(KeyCode.S))
+                if (ETCInput.GetButtonDown("Change"))
                 {
                     BallNearest(Player1, Player3, Player4, Player5);
                 }
@@ -74,7 +74,7 @@ public class Selceted : MonoBehaviour {
 
             if (player3Script.playerState != Player.PlayerState.HOLDING)
             {
-                if (Input.GetKeyDown(KeyCode.S))
+                if (ETCInput.GetButtonDown("Change"))
                 {
                      BallNearest(Player2, Player1, Player4, Player5);
                 }
@@ -92,7 +92,7 @@ public class Selceted : MonoBehaviour {
 
             if (player4Script.playerState != Player.PlayerState.HOLDING)
             {
-                if (Input.GetKeyDown(KeyCode.S))
+                if (ETCInput.GetButtonDown("Change"))
                 {
                      BallNearest(Player2, Player3, Player1, Player5);
                 }
@@ -110,7 +110,7 @@ public class Selceted : MonoBehaviour {
 
             if (player5Script.playerState != Player.PlayerState.HOLDING)
             {
-                if (Input.GetKeyDown(KeyCode.S))
+                if (ETCInput.GetButtonDown("Change"))
                 {
                     BallNearest(Player2, Player3, Player4, Player1);
                 }

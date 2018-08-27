@@ -30,8 +30,8 @@ public class Player : MonoBehaviour {
         GetBall();
         if (isSelected)//如果被选中的话
         {
-            h = Input.GetAxisRaw("Horizontal");
-            v = Input.GetAxisRaw("Vertical");
+            h = ETCInput.GetAxis("Horizontal");
+            v = ETCInput.GetAxis("Vertical");
             PlayerMove(h, v);
             Pass();
             Shoot();
@@ -48,7 +48,7 @@ public class Player : MonoBehaviour {
         movement =new Vector3(v, 0, -h); //获得移动方向
         if (movement != Vector3.zero)
         {          
-            if (Input.GetKey(KeyCode.E))//按下E键加速
+            if (ETCInput.GetButton("Run"))//按下E键加速
             {
                 //动画状态机
                 animator.SetBool("Alert", false);
@@ -105,17 +105,13 @@ public class Player : MonoBehaviour {
     //射门
     void Shoot()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())//UI防穿透
-        {
-            if (Input.GetMouseButtonDown(0) && playerState == PlayerState.HOLDING)
+//        if (!EventSystem.current.IsPointerOverGameObject())//UI防穿透
+//        {
+            if (ETCInput.GetButton("Shoot")&& playerState == PlayerState.HOLDING)
             {
-                transform.LookAt(goal.transform);//玩家面向球门
-                timer = 0;
-            }
-            if (Input.GetMouseButton(0) && playerState == PlayerState.HOLDING)
-            {
-                //蓄力力度计算，最大为10
-                if (timer < 10)
+            transform.LookAt(goal.transform);//玩家面向球门
+            //蓄力力度计算，最大为10
+            if (timer < 10)
                 {
                     timer += Time.deltaTime * 22;
                 }
@@ -133,7 +129,7 @@ public class Player : MonoBehaviour {
                     Invoke("Zero", 1.5f);
                 }
             }
-            if (Input.GetMouseButtonUp(0) && playerState == PlayerState.HOLDING)//玩家处于持球状态时点击射门
+            if (GameManager.isShootUp && playerState == PlayerState.HOLDING)//玩家处于持球状态时点击射门
             {
                 animator.SetTrigger("Shoot");
                 AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.kick);
@@ -157,28 +153,24 @@ public class Player : MonoBehaviour {
                 vector3.y = -vector3.z * 0.35f;
                 GameManager.Instance.ballRgd.velocity = vector3;
                 Invoke("Zero", 1.5f);
+                GameManager.isShootUp = false;
             }
-        }
-        
+//        }       
     }
-    //传球
+    //传球  
     void Pass()
     {
-        if (Input.GetKeyDown(KeyCode.S) && playerState == PlayerState.HOLDING)
+        if (ETCInput.GetButton("Pass") && playerState == PlayerState.HOLDING)
         {
-            transform.LookAt(passPlayer);//玩家面向接球者
-            timer = 0;
-        }
-        if (Input.GetKey(KeyCode.S) && playerState == PlayerState.HOLDING)
-        {
+            transform.LookAt(passPlayer);
             //蓄力力度计算，最大为10
             if (timer < 10)
             {
-                timer += Time.deltaTime * 22;
+                timer += Time.deltaTime * 22; 
             }
             else
             {
-                timer = 10;
+                timer = 10; 
                 animator.SetTrigger("Pass");
                 AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.kick);
                 GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward * 2f);//球脱离过近距离
@@ -186,7 +178,7 @@ public class Player : MonoBehaviour {
                 Invoke("Zero", 1.5f);
             }
         }
-        if (playerState == PlayerState.HOLDING && Input.GetKeyUp(KeyCode.S))//持球状态下按下S
+        if (playerState == PlayerState.HOLDING && GameManager.isPassUp)
         {
             float passSpeed;
             animator.SetTrigger("Pass");
@@ -208,8 +200,8 @@ public class Player : MonoBehaviour {
             }
             GameManager.Instance.ballRgd.velocity = (passPlayer.position - transform.position).normalized * passSpeed;//传球速度
             Invoke("Zero", 1.5f);
+            GameManager.isPassUp = false;
         }
-
     }
     void PowerToSpeed()//体力与速度的对应
     {
@@ -248,7 +240,7 @@ public class Player : MonoBehaviour {
             power = 100;
         }
     }
-    void Zero()
+    public void Zero()
     {
         timer = 0;
     }
