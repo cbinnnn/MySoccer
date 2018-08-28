@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MyCamera : MonoBehaviour {
     public static string nowCamera;//当前相机设置

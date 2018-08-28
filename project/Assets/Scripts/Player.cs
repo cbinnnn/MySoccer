@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour {
     public float power=100;//默认体力值
@@ -254,7 +253,7 @@ public class Player : MonoBehaviour {
                 animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
                 Vector3 targetPos = (GameManager.Instance.Player1.position+GameManager.Instance.Player2.position)/2;
-                targetPos.y = 0.2f;
+                targetPos.y = 0;
                 rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
                 transform.LookAt(targetPos);
                 if (Vector3.Distance(transform.position, targetPos) <= 1f)
@@ -271,11 +270,11 @@ public class Player : MonoBehaviour {
                 Vector3 targetPos;
                 if (GameManager.Instance.insBall.transform.position.z < -10)
                 {
-                    targetPos= new Vector3(0, 0.2f, -5);
+                    targetPos= new Vector3(0, 0, -5);
                 }
                 else
                 {
-                    targetPos = new Vector3(0, 0.2f, 5);
+                    targetPos = new Vector3(0, 0, 5);
                 }
                 if (transform.name==GameManager.Instance.DefensePlayer().name)
                 {
@@ -301,7 +300,7 @@ public class Player : MonoBehaviour {
                 animator.SetBool("Alert", false);
                 animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
-                Vector3 targetPos = new Vector3(-10, 0.2f, -15);
+                Vector3 targetPos = new Vector3(-10, 0, -15);
                 rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
                 transform.LookAt(targetPos);
                 if (Vector3.Distance(transform.position, targetPos) <= 1f)
@@ -318,11 +317,11 @@ public class Player : MonoBehaviour {
                 Vector3 targetPos;
                 if (GameManager.Instance.insBall.transform.position.z < -10)
                 {
-                    targetPos = new Vector3(-10, 0.2f, -5);
+                    targetPos = new Vector3(-10, 0, -5);
                 }
                 else
                 {
-                    targetPos = new Vector3(-10, 0.2f, 5);
+                    targetPos = new Vector3(-10, 0, 5);
                 }
                 if (transform.name == GameManager.Instance.DefensePlayer().name)
                 {
@@ -348,7 +347,7 @@ public class Player : MonoBehaviour {
                 animator.SetBool("Alert", false);
                 animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
-                Vector3 targetPos = new Vector3(10, 0.2f, -15);
+                Vector3 targetPos = new Vector3(10, 0, -15);
                 rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
                 transform.LookAt(targetPos);
                 if (Vector3.Distance(transform.position, targetPos) <= 1f)
@@ -365,11 +364,11 @@ public class Player : MonoBehaviour {
                 Vector3 targetPos;
                 if (GameManager.Instance.insBall.transform.position.z < -10)
                 {
-                    targetPos = new Vector3(10, 0.2f, -5);
+                    targetPos = new Vector3(10, 0, -5);
                 }
                 else
                 {
-                    targetPos = new Vector3(10, 0.2f, 5);
+                    targetPos = new Vector3(10, 0, 5);
                 }
                 if (transform.name == GameManager.Instance.DefensePlayer().name)
                 {
@@ -397,7 +396,7 @@ public class Player : MonoBehaviour {
                 animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
                 Vector3 targetPos = GameManager.Instance.Player1.position/2;
-                targetPos.y = 0.2f;
+                targetPos.y = 0;
                 rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
                 transform.LookAt(targetPos);
                 if (Vector3.Distance(transform.position, targetPos) <= 1f)
@@ -412,11 +411,11 @@ public class Player : MonoBehaviour {
                 Vector3 targetPos;
                 if (GameManager.Instance.insBall.transform.position.z < -10)
                 {
-                    targetPos = new Vector3(-5, 0.2f, 5);
+                    targetPos = new Vector3(-5, 0, 5);
                 }
                 else
                 {
-                    targetPos = new Vector3(-5, 0.2f, 10);
+                    targetPos = new Vector3(-5, 0, 10);
                 }
                 if (transform.name == GameManager.Instance.DefensePlayer().name)
                 {
@@ -463,7 +462,7 @@ public class Player : MonoBehaviour {
                 animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
                 Vector3 targetPos = GameManager.Instance.Player2.position / 2;
-                targetPos.y = 0.2f;
+                targetPos.y = 0;
                 rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
                 transform.LookAt(targetPos);
                 if (Vector3.Distance(transform.position, targetPos) <= 1f)
@@ -478,11 +477,11 @@ public class Player : MonoBehaviour {
                 Vector3 targetPos;
                 if (GameManager.Instance.insBall.transform.position.z < -10)
                 {
-                    targetPos = new Vector3(5, 0.2f, 5);
+                    targetPos = new Vector3(5, 0, 5);
                 }
                 else
                 {
-                    targetPos = new Vector3(5, 0.2f, 10);
+                    targetPos = new Vector3(5, 0, 10);
                 }
                 if (transform.name == GameManager.Instance.DefensePlayer().name)
                 {

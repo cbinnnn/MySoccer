@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour {
+    public RectTransform match;
     public ETCButton shoot;
     public ETCButton run;
     public ETCButton pass;
@@ -84,6 +86,8 @@ public class GameManager : MonoBehaviour {
     }
     // Use this for initialization
     void Start() {
+        match.DOLocalMoveY(-20, 1).SetEase(Ease.OutBounce);
+        match.DOLocalMoveY(160,1).SetDelay(1);
         BallIns();
         timeSpend = 0;
         //取得球员身上的脚本
