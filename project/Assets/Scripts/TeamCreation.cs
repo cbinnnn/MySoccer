@@ -18,6 +18,10 @@ public class TeamCreation : MonoBehaviour {
     private bool isOppoReday;
     public Image Warning;
     private Tweener tweener;
+    public Button teamPre;
+    public Button teamNext;
+    public Button oppoPre;
+    public Button oppoNext;
 	// Use this for initialization
 	void Start () {
         normal = teamReady.image.sprite;
@@ -26,8 +30,8 @@ public class TeamCreation : MonoBehaviour {
         oppoGameobjs = new GameObject[length];
         for(int i = 0; i < length; i++)
         {
-            teamGameobjs[i] = Instantiate(teamPrefabs[i], new Vector3 (-5,-1,-2),transform.rotation);
-            oppoGameobjs[i] = Instantiate(teamPrefabs[i], new Vector3 (5, -1, -2), transform.rotation);
+            teamGameobjs[i] = Instantiate(teamPrefabs[i], new Vector3 (-6.5f,-1,-2),transform.rotation);
+            oppoGameobjs[i] = Instantiate(teamPrefabs[i], new Vector3 (6.5f, -1, -2), transform.rotation);
         }
         Show();
 	}
@@ -88,6 +92,8 @@ public class TeamCreation : MonoBehaviour {
             teamGameobjs[teamSelectIndex].GetComponent<Animator>().SetBool("Select", true);
             teamGameobjs[teamSelectIndex].GetComponent<Animator>().SetBool("Cancel", false);
             isTeamReady = true;
+            teamPre.enabled = false;
+            teamNext.enabled = false;
         }
         else
         {
@@ -95,6 +101,8 @@ public class TeamCreation : MonoBehaviour {
             teamGameobjs[teamSelectIndex].GetComponent<Animator>().SetBool("Select", false);
             teamGameobjs[teamSelectIndex].GetComponent<Animator>().SetBool("Cancel", true);
             isTeamReady = false;
+            teamPre.enabled = true;
+            teamNext.enabled = true;
         }           
     }
     public void OnOppoReady()
@@ -105,6 +113,8 @@ public class TeamCreation : MonoBehaviour {
             oppoGameobjs[oppoSelectIndex].GetComponent<Animator>().SetBool("Select", true);
             oppoGameobjs[oppoSelectIndex].GetComponent<Animator>().SetBool("Cancel", false);
             isOppoReday = true;
+            oppoPre.enabled = false;
+            oppoNext.enabled = false;
         }            
         else
         {
@@ -112,6 +122,8 @@ public class TeamCreation : MonoBehaviour {
             oppoGameobjs[oppoSelectIndex].GetComponent<Animator>().SetBool("Select", false);
             oppoGameobjs[oppoSelectIndex].GetComponent<Animator>().SetBool("Cancel", true);
             isOppoReday = false;
+            oppoPre.enabled = true;
+            oppoNext.enabled = true;
         }            
     }
     public void Back()

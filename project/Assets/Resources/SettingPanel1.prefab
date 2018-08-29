@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 114678180446547358}
   - component: {fileID: 114839686882219062}
   m_Layer: 5
-  m_Name: SettingPanel1(Clone)
+  m_Name: SettingPanel1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

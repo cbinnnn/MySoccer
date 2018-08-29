@@ -250,3 +250,4 @@ MonoBehaviour:
   audioSources: []
   applause: {fileID: 8300000, guid: e2ef4fa0185fb47169b63fdaa5e6e9cf, type: 3}
   kick: {fileID: 8300000, guid: aa866efb87e154a519b3546090963d8d, type: 3}
+  hurryUp: {fileID: 8300000, guid: 240ca55853b0b44489d068a62dc4993f, type: 3}

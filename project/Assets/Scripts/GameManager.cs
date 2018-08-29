@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     public RectTransform match;
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour {
     private GameObject team1;
     private GameObject map;
     public Text timeText;
-    private float timeSpend=300;
+    private float timeSpend=10;
     private int minute;
     private int second;
     public Rigidbody ballRgd;
@@ -161,7 +161,6 @@ public class GameManager : MonoBehaviour {
     }
     private void FixedUpdate()
     {
-        Debug.Log(Time.deltaTime);
         MatchTime();
         ControllUI();
     }
@@ -184,7 +183,19 @@ public class GameManager : MonoBehaviour {
         {
             AudioManager.Instance.audioSources[0].Stop();
             Time.timeScale = 0;
-            Debug.Log("滚蛋");
+            if (Trigger.score1 > Trigger.score2)
+            {
+                PlayerPrefs.SetString("Win","Team");
+            }
+            else if (Trigger.score1 == Trigger.score2)
+            {
+                PlayerPrefs.SetString("Win", "None");
+            }
+            else
+            {
+                PlayerPrefs.SetString("Win", "Oppo");
+            }
+            SceneManager.LoadScene("Result");
         }
     }
     public IEnumerator Restart()

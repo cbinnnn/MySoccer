@@ -4,8 +4,8 @@ public class Trigger : MonoBehaviour {
     public Text score1Text;
     public Text score2Text;
     
-    private static  int score1;
-    private static int score2;
+    public static  int score1;
+    public static int score2;
     
     private void Update()
     {
