@@ -6,7 +6,7 @@ public class SatrtBtn : MonoBehaviour {
     public Text cameraSetting;
 	public void ClickStartBtn()
     {
-        MyCamera.nowCamera = CameraSetting.cameraFollow[CameraSetting.nowIndex];
+        MyCamera.nowCamera = CameraSetting.cameraFollow[CameraSetting.nowCameraIndex];
         SceneManager.LoadScene("Select");        
     }
 }

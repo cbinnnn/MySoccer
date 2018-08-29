@@ -3,19 +3,41 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CameraSetting : MonoBehaviour {
-    public Text now;
+    public Text nowCamera;
+//    public Text nowMatchTime;
     public static  List<string> cameraFollow=new List<string> { "球员","足球"};
-    public static int nowIndex=0;
+//    public static List<string> matchTime = new List<string> { "4", "5", "6","7","8"};
+    public static int nowCameraIndex=0;
+//    public static int nowMatchTimeIndex = 0;
     private void Update()
     {
-        now.text = cameraFollow[nowIndex];
+        nowCamera.text = cameraFollow[nowCameraIndex];
+//        nowMatchTime.text = matchTime[nowMatchTimeIndex];
     }
-    public void OnPre()
+    public void OnCameraPre()
     {
-        nowIndex = Mathf.Abs(nowIndex - 1) % cameraFollow.Count;
+        nowCameraIndex = Mathf.Abs(nowCameraIndex - 1) % cameraFollow.Count;
     }
-    public void OnNext()
+    public void OnCameraNext()
     {
-        nowIndex = Mathf.Abs(nowIndex + 1) % cameraFollow.Count;
+        nowCameraIndex = Mathf.Abs(nowCameraIndex + 1) % cameraFollow.Count;       
     }
+    /*
+    public void OnMatchTimePre()
+    {
+        if(nowMatchTimeIndex - 1 < 0)
+        {
+            nowMatchTimeIndex = matchTime.Count-1;
+        }
+        else
+        {
+            nowMatchTimeIndex = nowMatchTimeIndex - 1;
+        }
+        
+    }
+    public void OnMatchTimeNext()
+    {
+        nowMatchTimeIndex = Mathf.Abs(nowMatchTimeIndex + 1) % matchTime.Count;
+    }
+    */
 }

@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour {
     public AudioSource[] audioSources;
     public AudioClip applause;
     public AudioClip kick;
+    public AudioClip hurryUp;
     private static AudioManager _instance;
     public static AudioManager Instance
     {

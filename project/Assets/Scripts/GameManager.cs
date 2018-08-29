@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -62,7 +63,7 @@ public class GameManager : MonoBehaviour {
     private GameObject team1;
     private GameObject map;
     public Text timeText;
-    private float timeSpend;
+    private float timeSpend=300;
     private int minute;
     private int second;
     public Rigidbody ballRgd;
@@ -85,11 +86,11 @@ public class GameManager : MonoBehaviour {
         //        Instantiate(map);
     }
     // Use this for initialization
-    void Start() {
+    void Start()
+    { 
         match.DOLocalMoveY(-20, 1).SetEase(Ease.OutBounce);
         match.DOLocalMoveY(160,1).SetDelay(1);
         BallIns();
-        timeSpend = 0;
         //取得球员身上的脚本
         player1Script = Player1.GetComponent<Player>();
         player2Script = Player2.GetComponent<Player>();
@@ -160,6 +161,7 @@ public class GameManager : MonoBehaviour {
     }
     private void FixedUpdate()
     {
+        Debug.Log(Time.deltaTime);
         MatchTime();
         ControllUI();
     }
@@ -170,13 +172,20 @@ public class GameManager : MonoBehaviour {
     }
     void MatchTime()
     {
-        timeSpend += Time.deltaTime;
-        // GlobalSetting.timeSpent = timeSpend;
-
+        timeSpend -= Time.deltaTime;
         minute = (int)timeSpend / 60;
         second = (int)timeSpend - minute * 60;
-
         timeText.text = string.Format("{0:D2}:{1:D2}", minute, second);
+        if (timeSpend < 60&timeSpend>=1)
+        {
+            AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.hurryUp,0.3f);            
+        }
+        if (timeSpend < 1)
+        {
+            AudioManager.Instance.audioSources[0].Stop();
+            Time.timeScale = 0;
+            Debug.Log("滚蛋");
+        }
     }
     public IEnumerator Restart()
     {

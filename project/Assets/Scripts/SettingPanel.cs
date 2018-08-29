@@ -48,11 +48,12 @@ public class SettingPanel : MonoBehaviour {
         AudioManager.Instance.audioSources[0].volume = oldAudioVolume;
         Destroy(this.gameObject,2);
         SettingBtn.isClone = false;
+        BackBtn.isClone = false;
     }
 	public void OnSave()
     {
         tweener.PlayBackwards();
-        MyCamera.nowCamera = CameraSetting.cameraFollow[CameraSetting.nowIndex];
+        MyCamera.nowCamera = CameraSetting.cameraFollow[CameraSetting.nowCameraIndex];
         Time.timeScale = 1;
         Destroy(this.gameObject,2);
         SettingBtn.isClone = false;

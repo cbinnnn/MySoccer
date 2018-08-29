@@ -51,7 +51,7 @@ LightmapSettings:
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
     m_TemporalCoherenceThreshold: 1
-    m_EnvironmentLightingMode: 0
+    m_EnvironmentLightingMode: 1
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
@@ -8884,6 +8884,42 @@ Prefab:
     - target: {fileID: 4600145936781250, guid: 9f61ef8dae6606643a9a8bd23eab960e, type: 2}
       propertyPath: m_LocalPosition.y
       value: 11.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 1125069608187322, guid: 9f61ef8dae6606643a9a8bd23eab960e, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145563918781798, guid: 9f61ef8dae6606643a9a8bd23eab960e, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233230010379900, guid: 9f61ef8dae6606643a9a8bd23eab960e, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945831906375224, guid: 9f61ef8dae6606643a9a8bd23eab960e, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1462913567467204, guid: 9f61ef8dae6606643a9a8bd23eab960e, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1500097343118530, guid: 9f61ef8dae6606643a9a8bd23eab960e, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1936586841478536, guid: 9f61ef8dae6606643a9a8bd23eab960e, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391670216700486, guid: 9f61ef8dae6606643a9a8bd23eab960e, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396543277188020, guid: 9f61ef8dae6606643a9a8bd23eab960e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f61ef8dae6606643a9a8bd23eab960e, type: 2}
