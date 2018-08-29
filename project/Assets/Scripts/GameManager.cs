@@ -276,6 +276,17 @@ public class GameManager : MonoBehaviour {
     {
         return false;
     }
+    public bool AllAttack()
+    {
+        if(player1Script.playerState==Player.PlayerState.ATTACK&& player2Script.playerState == Player.PlayerState.ATTACK&& player3Script.playerState == Player.PlayerState.ATTACK&& player4Script.playerState == Player.PlayerState.ATTACK&& player5Script.playerState == Player.PlayerState.ATTACK)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     public Transform DefensePlayer()
     {
         Transform defensePlayer = Player1;

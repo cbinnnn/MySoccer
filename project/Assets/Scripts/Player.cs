@@ -125,7 +125,7 @@ public class Player : MonoBehaviour {
                     vector3 *= 14;
                     vector3.y = -vector3.z * 0.35f;
                     GameManager.Instance.ballRgd.velocity = vector3;
-                    Invoke("Zero", 1.5f);
+                    Invoke("Zero", 1f);
                 }
             }
             if (GameManager.isShootUp && playerState == PlayerState.HOLDING)//玩家处于持球状态时点击射门
@@ -151,7 +151,7 @@ public class Player : MonoBehaviour {
                 }
                 vector3.y = -vector3.z * 0.35f;
                 GameManager.Instance.ballRgd.velocity = vector3;
-                Invoke("Zero", 1.5f);
+                Invoke("Zero", 1f);
                 GameManager.isShootUp = false;
             }
 //        }       
@@ -174,7 +174,7 @@ public class Player : MonoBehaviour {
                 AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.kick);
                 GameManager.Instance.ballRgd.MovePosition(transform.position + transform.forward * 2f);//球脱离过近距离
                 GameManager.Instance.ballRgd.velocity = (passPlayer.position - transform.position).normalized * 25;//传球速度
-                Invoke("Zero", 1.5f);
+                Invoke("Zero", 1f);
             }
         }
         if (playerState == PlayerState.HOLDING && GameManager.isPassUp)
@@ -198,7 +198,7 @@ public class Player : MonoBehaviour {
                 passSpeed = 18 + timer;
             }
             GameManager.Instance.ballRgd.velocity = (passPlayer.position - transform.position).normalized * passSpeed;//传球速度
-            Invoke("Zero", 1.5f);
+            Invoke("Zero", 1f);
             GameManager.isPassUp = false;
         }
     }
@@ -252,15 +252,23 @@ public class Player : MonoBehaviour {
                 animator.SetBool("Alert", false);
                 animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
-                Vector3 targetPos = (GameManager.Instance.Player1.position+GameManager.Instance.Player2.position)/2;
-                targetPos.y = 0;
-                rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
-                transform.LookAt(targetPos);
-                if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                if (GameManager.Instance.AllAttack()&& transform.name == GameManager.Instance.DefensePlayer().name)
                 {
-                    animator.SetBool("Alert", true);
-                    animator.SetBool("Run", false);
+                        rgd.MovePosition(Vector3.Lerp(transform.position, GameManager.Instance.insBall.transform.position, Time.deltaTime * 0.5f));
+                        transform.LookAt(new Vector3(GameManager.Instance.insBall.transform.position.x, 0, GameManager.Instance.insBall.transform.position.z));
                 }
+                else
+                {
+                    Vector3 targetPos = (GameManager.Instance.Player1.position + GameManager.Instance.Player2.position) / 2;
+                    targetPos.y = 0;
+                    rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
+                    transform.LookAt(targetPos);
+                    if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                    {
+                        animator.SetBool("Alert", true);
+                        animator.SetBool("Run", false);
+                    }
+                }                
             }
             else if (playerState == PlayerState.DEFENCE)
             {
@@ -279,7 +287,7 @@ public class Player : MonoBehaviour {
                 if (transform.name==GameManager.Instance.DefensePlayer().name)
                 {
                     rgd.MovePosition(Vector3.Lerp(transform.position, GameManager.Instance.insBall.transform.position, Time.deltaTime * 0.5f));
-                    transform.LookAt(new Vector3(GameManager.Instance.insBall.transform.position.x, 0.2f, GameManager.Instance.insBall.transform.position.z));
+                    transform.LookAt(new Vector3(GameManager.Instance.insBall.transform.position.x, 0, GameManager.Instance.insBall.transform.position.z));
                 }
                 else
                 {
@@ -300,14 +308,22 @@ public class Player : MonoBehaviour {
                 animator.SetBool("Alert", false);
                 animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
-                Vector3 targetPos = new Vector3(-10, 0, -15);
-                rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
-                transform.LookAt(targetPos);
-                if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                if (GameManager.Instance.AllAttack() && transform.name == GameManager.Instance.DefensePlayer().name)
                 {
-                    animator.SetBool("Alert", true);
-                    animator.SetBool("Run", false);
+                    rgd.MovePosition(Vector3.Lerp(transform.position, GameManager.Instance.insBall.transform.position, Time.deltaTime * 0.5f));
+                    transform.LookAt(new Vector3(GameManager.Instance.insBall.transform.position.x, 0, GameManager.Instance.insBall.transform.position.z));
                 }
+                else
+                {
+                    Vector3 targetPos = new Vector3(-10, 0, -15);
+                    rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
+                    transform.LookAt(targetPos);
+                    if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                    {
+                        animator.SetBool("Alert", true);
+                        animator.SetBool("Run", false);
+                    }
+                }               
             }
             else if (playerState == PlayerState.DEFENCE)
             {
@@ -347,14 +363,22 @@ public class Player : MonoBehaviour {
                 animator.SetBool("Alert", false);
                 animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
-                Vector3 targetPos = new Vector3(10, 0, -15);
-                rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
-                transform.LookAt(targetPos);
-                if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                if (GameManager.Instance.AllAttack() && transform.name == GameManager.Instance.DefensePlayer().name)
                 {
-                    animator.SetBool("Alert", true);
-                    animator.SetBool("Run", false);
+                    rgd.MovePosition(Vector3.Lerp(transform.position, GameManager.Instance.insBall.transform.position, Time.deltaTime * 0.5f));
+                    transform.LookAt(new Vector3(GameManager.Instance.insBall.transform.position.x, 0, GameManager.Instance.insBall.transform.position.z));
                 }
+                else
+                {
+                    Vector3 targetPos = new Vector3(10, 0, -15);
+                    rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
+                    transform.LookAt(targetPos);
+                    if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                    {
+                        animator.SetBool("Alert", true);
+                        animator.SetBool("Run", false);
+                    }
+                }               
             }
             else if (playerState == PlayerState.DEFENCE)
             {
@@ -395,15 +419,23 @@ public class Player : MonoBehaviour {
                 animator.SetBool("Alert", false);
                 animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
-                Vector3 targetPos = GameManager.Instance.Player1.position/2;
-                targetPos.y = 0;
-                rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
-                transform.LookAt(targetPos);
-                if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                if (GameManager.Instance.AllAttack() && transform.name == GameManager.Instance.DefensePlayer().name)
                 {
-                    animator.SetBool("Alert", true);
-                    animator.SetBool("Run", false);
+                    rgd.MovePosition(Vector3.Lerp(transform.position, GameManager.Instance.insBall.transform.position, Time.deltaTime * 0.5f));
+                    transform.LookAt(new Vector3(GameManager.Instance.insBall.transform.position.x, 0, GameManager.Instance.insBall.transform.position.z));
                 }
+                else
+                {
+                    Vector3 targetPos = GameManager.Instance.Player1.position / 2;
+                    targetPos.y = 0;
+                    rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
+                    transform.LookAt(targetPos);
+                    if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                    {
+                        animator.SetBool("Alert", true);
+                        animator.SetBool("Run", false);
+                    }
+                }              
             }
             else if (playerState == PlayerState.DEFENCE)
             {
@@ -461,15 +493,23 @@ public class Player : MonoBehaviour {
                 animator.SetBool("Alert", false);
                 animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
-                Vector3 targetPos = GameManager.Instance.Player2.position / 2;
-                targetPos.y = 0;
-                rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
-                transform.LookAt(targetPos);
-                if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                if (GameManager.Instance.AllAttack() && transform.name == GameManager.Instance.DefensePlayer().name)
                 {
-                    animator.SetBool("Alert", true);
-                    animator.SetBool("Run", false);
+                    rgd.MovePosition(Vector3.Lerp(transform.position, GameManager.Instance.insBall.transform.position, Time.deltaTime * 0.5f));
+                    transform.LookAt(new Vector3(GameManager.Instance.insBall.transform.position.x, 0, GameManager.Instance.insBall.transform.position.z));
                 }
+                else
+                {
+                    Vector3 targetPos = GameManager.Instance.Player2.position / 2;
+                    targetPos.y = 0;
+                    rgd.MovePosition(Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.25f));
+                    transform.LookAt(targetPos);
+                    if (Vector3.Distance(transform.position, targetPos) <= 1f)
+                    {
+                        animator.SetBool("Alert", true);
+                        animator.SetBool("Run", false);
+                    }
+                }               
             }
             else if (playerState == PlayerState.DEFENCE)
             {
