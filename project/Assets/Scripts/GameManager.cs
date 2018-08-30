@@ -5,6 +5,7 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
+    public Canvas canvas;
     public RectTransform match;
     public ETCButton shoot;
     public ETCButton run;
@@ -63,9 +64,8 @@ public class GameManager : MonoBehaviour {
     private GameObject team1;
     private GameObject map;
     public Text timeText;
-    private float timeSpend=10;
-    private int minute;
-    private int second;
+    public float matchTime=10;
+    private float timeRest;
     public Rigidbody ballRgd;
     public GameObject insBall;
     public GameObject ball;
@@ -87,7 +87,9 @@ public class GameManager : MonoBehaviour {
     }
     // Use this for initialization
     void Start()
-    { 
+    {
+        AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.start);
+        timeRest = matchTime;
         match.DOLocalMoveY(-20, 1).SetEase(Ease.OutBounce);
         match.DOLocalMoveY(160,1).SetDelay(1);
         BallIns();
@@ -161,7 +163,10 @@ public class GameManager : MonoBehaviour {
     }
     private void FixedUpdate()
     {
-        MatchTime();
+        if (timeRest > 0)
+        {
+            MatchTime();
+        }
         ControllUI();
     }
     private void BallIns()
@@ -171,37 +176,49 @@ public class GameManager : MonoBehaviour {
     }
     void MatchTime()
     {
-        timeSpend -= Time.deltaTime;
-        minute = (int)timeSpend / 60;
-        second = (int)timeSpend - minute * 60;
-        timeText.text = string.Format("{0:D2}:{1:D2}", minute, second);
-        if (timeSpend < 60&timeSpend>=1)
+        if (timeRest < 1&&timeRest>0)
+        {
+            timeRest = 0;
+        }
+        else if(timeRest>=1)
+        {
+            timeRest -= Time.deltaTime;
+        }       
+        timeText.text = string.Format("{0:D2}:{1:D2}", (int)timeRest / 60, (int)timeRest - (int)timeRest / 60 * 60);
+        if (timeRest < 60& timeRest >= 1)
         {
             AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.hurryUp,0.3f);            
         }
-        if (timeSpend < 1)
+        else if (timeRest ==0)
         {
-            AudioManager.Instance.audioSources[0].Stop();
-            Time.timeScale = 0;
-            if (Trigger.score1 > Trigger.score2)
-            {
-                PlayerPrefs.SetString("Win","Team");
-            }
-            else if (Trigger.score1 == Trigger.score2)
-            {
-                PlayerPrefs.SetString("Win", "None");
-            }
-            else
-            {
-                PlayerPrefs.SetString("Win", "Oppo");
-            }
-            SceneManager.LoadScene("Result");
+            timeRest = -0.1f;
+            AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.end);
+            canvas.gameObject.SetActive(false);
+            StartCoroutine(End());
         }
     }
     public IEnumerator Restart()
     {
         yield return new WaitForSeconds(3);
         PositionReset();
+    }
+    IEnumerator End()
+    {
+        yield return new WaitForSeconds(3f);
+        AudioManager.Instance.audioSources[0].Stop();
+        if (Trigger.score1 > Trigger.score2)
+        {
+            PlayerPrefs.SetString("Win", "Team");
+        }
+        else if (Trigger.score1 == Trigger.score2)
+        {
+            PlayerPrefs.SetString("Win", "None");
+        }
+        else
+        {
+            PlayerPrefs.SetString("Win", "Oppo");
+        }
+        SceneManager.LoadScene("Result");
     }
     Vector3 BallRandom()
     {

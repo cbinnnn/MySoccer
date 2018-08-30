@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour {
     public AudioClip applause;
     public AudioClip kick;
     public AudioClip hurryUp;
+    public AudioClip start;
+    public AudioClip end;
     private static AudioManager _instance;
     public static AudioManager Instance
     {

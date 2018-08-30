@@ -22,8 +22,22 @@ public class TeamCreation : MonoBehaviour {
     public Button teamNext;
     public Button oppoPre;
     public Button oppoNext;
-	// Use this for initialization
-	void Start () {
+    public Text teamName;
+    public Text oppoName;
+    private static TeamCreation _instance;
+    public static TeamCreation Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+    private void Awake()
+    {
+        _instance = this;
+    }
+    // Use this for initialization
+    void Start () {
         normal = teamReady.image.sprite;
         length = teamPrefabs.Length;
         teamGameobjs = new GameObject[length];
@@ -37,6 +51,8 @@ public class TeamCreation : MonoBehaviour {
 	}
 	void Show()
     {
+        teamName.text = teamPrefabs[teamSelectIndex].name;
+        oppoName.text = teamPrefabs[oppoSelectIndex].name;
         teamGameobjs[teamSelectIndex].SetActive(true);
         oppoGameobjs[oppoSelectIndex].SetActive(true);
         for (int i = 0; i < length; i++)

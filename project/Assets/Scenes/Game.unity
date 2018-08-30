@@ -1325,6 +1325,7 @@ RectTransform:
   - {fileID: 648559598}
   - {fileID: 475725504}
   - {fileID: 471480583}
+  - {fileID: 560964904}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5731,19 +5732,19 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 560964900}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.41666663, y: 0.41666663, z: 0.41666663}
   m_Children:
   - {fileID: 1407398792}
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 164351192}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 399.99997, y: 224.99998}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &563632237
 GameObject:
   m_ObjectHideFlags: 0
@@ -10351,6 +10352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 746e4ec7c6d7c2042a1f0d3b424fe098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 164351191}
   match: {fileID: 471480583}
   shoot: {fileID: 1465566666}
   run: {fileID: 395483683}
@@ -10438,6 +10440,7 @@ MonoBehaviour:
   position11: {fileID: 4927220162813296, guid: 5b0299f16e5d54d4cb9f3a3d90b766be, type: 2}
   position12: {fileID: 4526698335137566, guid: 5b0299f16e5d54d4cb9f3a3d90b766be, type: 2}
   timeText: {fileID: 1055332588}
+  matchTime: 10
   ballRgd: {fileID: 0}
   insBall: {fileID: 0}
   ball: {fileID: 100000, guid: 50ac29d6ac8604f1ab45ea4fdc30e7ee, type: 2}

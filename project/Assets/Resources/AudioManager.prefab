@@ -251,3 +251,5 @@ MonoBehaviour:
   applause: {fileID: 8300000, guid: e2ef4fa0185fb47169b63fdaa5e6e9cf, type: 3}
   kick: {fileID: 8300000, guid: aa866efb87e154a519b3546090963d8d, type: 3}
   hurryUp: {fileID: 8300000, guid: 240ca55853b0b44489d068a62dc4993f, type: 3}
+  start: {fileID: 8300000, guid: d766a66235d0e0c4e94ff93c0f193596, type: 3}
+  end: {fileID: 8300000, guid: 5a46b2efd7dfda047bfd1e7407cc8006, type: 3}
