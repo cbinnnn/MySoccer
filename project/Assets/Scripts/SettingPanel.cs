@@ -47,8 +47,8 @@ public class SettingPanel : MonoBehaviour {
         AudioManager.Instance.audioSources[1].volume = oldBgmVolume;
         AudioManager.Instance.audioSources[0].volume = oldAudioVolume;
         Destroy(this.gameObject,2);
-        SettingBtn.isClone = false;
-        BackBtn.isClone = false;
+        Menu.isSettingClone = false;
+        Menu.isComfirmClone = false;
     }
 	public void OnSave()
     {
@@ -56,7 +56,7 @@ public class SettingPanel : MonoBehaviour {
         MyCamera.nowCamera = CameraSetting.cameraFollow[CameraSetting.nowCameraIndex];
         Time.timeScale = 1;
         Destroy(this.gameObject,2);
-        SettingBtn.isClone = false;
+        Menu.isSettingClone = false;
     }
     public void Bgm()
     {

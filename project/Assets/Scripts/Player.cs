@@ -34,6 +34,7 @@ public class Player : MonoBehaviour {
             PlayerMove(h, v);
             Pass();
             Shoot();
+            Tackle();
         }
         else
         {
@@ -46,24 +47,19 @@ public class Player : MonoBehaviour {
     {        
         movement =new Vector3(v, 0, -h); //获得移动方向
         if (movement != Vector3.zero)
-        {          
+        {
+            //动画状态机
+            animator.SetBool("Alert", false);
+            animator.SetBool("Run", true);
             if (ETCInput.GetButton("Run"))//按下E键加速
             {
-                //动画状态机
-                animator.SetBool("Alert", false);
-                animator.SetBool("Walk", false);
-                animator.SetBool("Run",true);
                 MinusPower();                            
                 //加速后速度
                 speed = Mathf.Lerp(speed,upSpeed,Time.deltaTime*2);
             }
             //没按E键或松开
             else
-            {
-                //动画状态机
-                animator.SetBool("Alert", false);
-                animator.SetBool("Walk",true);
-                animator.SetBool("Run", false);
+            {              
                 //恢复默认速度
                 PowerToSpeed();
             }
@@ -73,7 +69,6 @@ public class Player : MonoBehaviour {
             RePower();
             //动画状态机
             animator.SetBool("Alert",true);
-            animator.SetBool("Walk", false);
             animator.SetBool("Run", false);
         }        
         movement = movement.normalized * speed * Time.deltaTime; //movement.normalized使向量单位化，结果等于每帧角色移动的距离
@@ -95,7 +90,7 @@ public class Player : MonoBehaviour {
             {
                 playerState = PlayerState.ATTACK;
             }
-            if (GameManager.Instance.DefenseState())
+            else if (GameManager.Instance.DefenseState())
             {
                 playerState = PlayerState.DEFENCE;
             }
@@ -202,6 +197,15 @@ public class Player : MonoBehaviour {
             GameManager.isPassUp = false;
         }
     }
+    //铲球
+    void Tackle()
+    {
+        if (playerState==PlayerState.DEFENCE&&GameManager.isTackleDown) 
+        {
+            animator.SetTrigger("Tackle");
+            GameManager.isTackleDown = false;
+        }
+    }
     void PowerToSpeed()//体力与速度的对应
     {
         //有体力的话默认速度
@@ -250,7 +254,6 @@ public class Player : MonoBehaviour {
             if(playerState == PlayerState.ATTACK)
             {
                 animator.SetBool("Alert", false);
-                animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
                 if (GameManager.Instance.AllAttack()&& transform.name == GameManager.Instance.DefensePlayer().name)
                 {
@@ -273,7 +276,6 @@ public class Player : MonoBehaviour {
             else if (playerState == PlayerState.DEFENCE)
             {
                 animator.SetBool("Alert", false);
-                animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
                 Vector3 targetPos;
                 if (GameManager.Instance.insBall.transform.position.z < -10)
@@ -306,7 +308,6 @@ public class Player : MonoBehaviour {
             if(playerState == PlayerState.ATTACK)
             {
                 animator.SetBool("Alert", false);
-                animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
                 if (GameManager.Instance.AllAttack() && transform.name == GameManager.Instance.DefensePlayer().name)
                 {
@@ -328,7 +329,6 @@ public class Player : MonoBehaviour {
             else if (playerState == PlayerState.DEFENCE)
             {
                 animator.SetBool("Alert", false);
-                animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
                 Vector3 targetPos;
                 if (GameManager.Instance.insBall.transform.position.z < -10)
@@ -361,7 +361,6 @@ public class Player : MonoBehaviour {
             if(playerState == PlayerState.ATTACK)
             {
                 animator.SetBool("Alert", false);
-                animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
                 if (GameManager.Instance.AllAttack() && transform.name == GameManager.Instance.DefensePlayer().name)
                 {
@@ -383,7 +382,6 @@ public class Player : MonoBehaviour {
             else if (playerState == PlayerState.DEFENCE)
             {
                 animator.SetBool("Alert", false);
-                animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
                 Vector3 targetPos;
                 if (GameManager.Instance.insBall.transform.position.z < -10)
@@ -417,7 +415,6 @@ public class Player : MonoBehaviour {
             {
                 animator.SetBool("Back", false);
                 animator.SetBool("Alert", false);
-                animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
                 if (GameManager.Instance.AllAttack() && transform.name == GameManager.Instance.DefensePlayer().name)
                 {
@@ -491,7 +488,6 @@ public class Player : MonoBehaviour {
             {
                 animator.SetBool("Back", false);
                 animator.SetBool("Alert", false);
-                animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
                 if (GameManager.Instance.AllAttack() && transform.name == GameManager.Instance.DefensePlayer().name)
                 {

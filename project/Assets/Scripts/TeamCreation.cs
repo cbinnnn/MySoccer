@@ -150,6 +150,8 @@ public class TeamCreation : MonoBehaviour {
     {
         if (isTeamReady && isOppoReday)
         {
+            Trigger.score1 = 0;
+            Trigger.score2 = 0;
             PlayerPrefs.SetInt("Team", teamSelectIndex);
             PlayerPrefs.SetInt("Oppo", oppoSelectIndex);
             AudioManager.Instance.audioSources[0].Play();

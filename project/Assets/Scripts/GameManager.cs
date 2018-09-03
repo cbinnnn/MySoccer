@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
     public ETCButton change;
     public static bool isShootUp;
     public static bool isPassUp;
+    public static bool isTackleDown;
     public Transform Player1;
     public Transform Player2;
     public Transform Player3;
@@ -24,6 +25,11 @@ public class GameManager : MonoBehaviour {
     public Player player3Script;
     public Player player4Script;
     public Player player5Script;
+    public Opponent oppo1Script;
+    public Opponent oppo2Script;
+    public Opponent oppo3Script;
+    public Opponent oppo4Script;
+    public Opponent oppo5Script;
     public GameObject[] players;
     public GameObject[] oppoPlayers;
     public Material[] team1Materials;
@@ -64,7 +70,7 @@ public class GameManager : MonoBehaviour {
     private GameObject team1;
     private GameObject map;
     public Text timeText;
-    public float matchTime=10;
+    public float matchTime=60;
     private float timeRest;
     public Rigidbody ballRgd;
     public GameObject insBall;
@@ -99,6 +105,11 @@ public class GameManager : MonoBehaviour {
         player3Script = Player3.GetComponent<Player>();
         player4Script = Player4.GetComponent<Player>();
         player5Script = Player5.GetComponent<Player>();
+        oppo1Script = Opponent1.GetComponent<Opponent>();
+        oppo2Script = Opponent2.GetComponent<Opponent>();
+        oppo3Script = Opponent3.GetComponent<Opponent>();
+        oppo4Script = Opponent4.GetComponent<Opponent>();
+        oppo5Script = Opponent5.GetComponent<Opponent>();
         player1Animator = Player1.GetComponent<Animator>();
         player2Animator = Player2.GetComponent<Animator>();
         player3Animator = Player3.GetComponent<Animator>();
@@ -204,26 +215,74 @@ public class GameManager : MonoBehaviour {
     }
     IEnumerator End()
     {
-        yield return new WaitForSeconds(3f);
-        AudioManager.Instance.audioSources[0].Stop();
         if (Trigger.score1 > Trigger.score2)
         {
+            TeamWin();
             PlayerPrefs.SetString("Win", "Team");
         }
         else if (Trigger.score1 == Trigger.score2)
         {
+            NoWin();
             PlayerPrefs.SetString("Win", "None");
         }
         else
         {
+            OppoWin();
             PlayerPrefs.SetString("Win", "Oppo");
         }
+        yield return new WaitForSeconds(4f);
+        AudioManager.Instance.audioSources[0].Stop();        
         SceneManager.LoadScene("Result");
+    }
+    public void TeamWin()
+    {
+        player1Animator.SetTrigger("Win");
+        player2Animator.SetTrigger("Win");
+        player3Animator.SetTrigger("Win");
+        player4Animator.SetTrigger("Win");
+        player5Animator.SetTrigger("Win");
+        goalKeeperAnimator.SetTrigger("Win");
+        opponent1Animator.SetTrigger("Lose");
+        opponent2Animator.SetTrigger("Lose");
+        opponent3Animator.SetTrigger("Lose");
+        opponent4Animator.SetTrigger("Lose");
+        opponent5Animator.SetTrigger("Lose");
+        opponentGoalKeeperAnimator.SetTrigger("Lose");
+    }
+    public void OppoWin()
+    {
+        player1Animator.SetTrigger("Lose");
+        player2Animator.SetTrigger("Lose");
+        player3Animator.SetTrigger("Lose");
+        player4Animator.SetTrigger("Lose");
+        player5Animator.SetTrigger("Lose");
+        goalKeeperAnimator.SetTrigger("Lose");
+        opponent1Animator.SetTrigger("Win");
+        opponent2Animator.SetTrigger("Win");
+        opponent3Animator.SetTrigger("Win");
+        opponent4Animator.SetTrigger("Win");
+        opponent5Animator.SetTrigger("Win");
+        opponentGoalKeeperAnimator.SetTrigger("Win");
+    }
+    void NoWin()
+    {
+        player1Animator.SetTrigger("Rest");
+        player2Animator.SetTrigger("Rest");
+        player3Animator.SetTrigger("Rest");
+        player4Animator.SetTrigger("Rest");
+        player5Animator.SetTrigger("Rest");
+        goalKeeperAnimator.SetTrigger("Rest");
+        opponent1Animator.SetTrigger("Rest");
+        opponent2Animator.SetTrigger("Rest");
+        opponent3Animator.SetTrigger("Rest");
+        opponent4Animator.SetTrigger("Rest");
+        opponent5Animator.SetTrigger("Rest");
+        opponentGoalKeeperAnimator.SetTrigger("Rest");
     }
     Vector3 BallRandom()
     {
         Vector3 ballRandom;
-        if (Random.Range(0, 1) == 0)
+        if (Random.Range(0, 2) == 0)
         {
             ballRandom = new Vector3(0, 0, 7);
         }
@@ -275,23 +334,7 @@ public class GameManager : MonoBehaviour {
     }
     public bool AttackState()
     {
-        if (player1Script.playerState == Player.PlayerState.HOLDING)
-        {
-            return true;
-        }
-        else if (player2Script.playerState == Player.PlayerState.HOLDING)
-        {
-            return true;
-        }
-        else if (player3Script.playerState == Player.PlayerState.HOLDING)
-        {
-            return true;
-        }
-        else if (player4Script.playerState == Player.PlayerState.HOLDING)
-        {
-            return true;
-        }
-        else if (player5Script.playerState == Player.PlayerState.HOLDING)
+        if (player1Script.playerState == Player.PlayerState.HOLDING|| player2Script.playerState == Player.PlayerState.HOLDING|| player3Script.playerState == Player.PlayerState.HOLDING|| player4Script.playerState == Player.PlayerState.HOLDING|| player5Script.playerState == Player.PlayerState.HOLDING)
         {
             return true;
         }
@@ -302,7 +345,14 @@ public class GameManager : MonoBehaviour {
     }
     public bool DefenseState()
     {
-        return false;
+        if (oppo1Script.oppoState == Opponent.OppoState.HOLDING|| oppo2Script.oppoState == Opponent.OppoState.HOLDING||oppo3Script.oppoState == Opponent.OppoState.HOLDING|| oppo4Script.oppoState == Opponent.OppoState.HOLDING|| oppo5Script.oppoState == Opponent.OppoState.HOLDING)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     public bool AllAttack()
     {
@@ -351,6 +401,10 @@ public class GameManager : MonoBehaviour {
             isPassUp = true;
         }
     }
+    public void TackleDown()
+    {
+        isTackleDown = true;
+    }
     void ControllUI()
     {
         if (player1Script.playerState == Player.PlayerState.HOLDING || player2Script.playerState == Player.PlayerState.HOLDING || player3Script.playerState == Player.PlayerState.HOLDING || player4Script.playerState == Player.PlayerState.HOLDING || player5Script.playerState == Player.PlayerState.HOLDING)
@@ -363,6 +417,8 @@ public class GameManager : MonoBehaviour {
             run.visible = true;
             change.activated = false;
             change.visible = false;
+            tackle.activated = false;
+            tackle.visible = false;
         }
         if (player1Script.playerState == Player.PlayerState.ATTACK && player2Script.playerState == Player.PlayerState.ATTACK && player3Script.playerState == Player.PlayerState.ATTACK && player4Script.playerState == Player.PlayerState.ATTACK && player5Script.playerState == Player.PlayerState.ATTACK)
         {

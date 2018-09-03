@@ -34,7 +34,7 @@ public class Selceted : MonoBehaviour {
             //箭头始终朝向足球
             ArrowToBall(Player1);
             
-            if (player1Script.playerState != Player.PlayerState.HOLDING)//如果处于防守状态
+            if (player1Script.playerState != Player.PlayerState.HOLDING)//如果处于无球状态
             {
                 if (ETCInput.GetButtonDown("Change"))//按切换
                 {

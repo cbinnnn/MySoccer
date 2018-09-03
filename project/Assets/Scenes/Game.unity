@@ -328,6 +328,7 @@ GameObject:
   - component: {fileID: 25405784}
   - component: {fileID: 25405783}
   - component: {fileID: 25405782}
+  - component: {fileID: 25405785}
   m_Layer: 0
   m_Name: Player_Opponent (3)
   m_TagString: OponentTeam
@@ -384,6 +385,18 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &25405785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 25405781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af706ea80ed2d4c4a86479cabfd98dfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oppoState: 0
 --- !u!1 &28263353
 GameObject:
   m_ObjectHideFlags: 0
@@ -3436,6 +3449,7 @@ GameObject:
   - component: {fileID: 361332324}
   - component: {fileID: 361332323}
   - component: {fileID: 361332322}
+  - component: {fileID: 361332325}
   m_Layer: 0
   m_Name: Player_Opponent (4)
   m_TagString: OponentTeam
@@ -3492,6 +3506,18 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &361332325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 361332321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af706ea80ed2d4c4a86479cabfd98dfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oppoState: 0
 --- !u!1 &377269138
 GameObject:
   m_ObjectHideFlags: 0
@@ -4693,7 +4719,18 @@ MonoBehaviour:
   showCameraInspector: 0
   onDown:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1135360900}
+        m_MethodName: TackleDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: ETCButton+OnDownHandler, Assembly-CSharp-firstpass, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   onPressed:
@@ -4710,7 +4747,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1135360900}
-        m_MethodName: ShootUp
+        m_MethodName: TackleUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5406,6 +5443,7 @@ GameObject:
   - component: {fileID: 531083908}
   - component: {fileID: 531083907}
   - component: {fileID: 531083906}
+  - component: {fileID: 531083909}
   m_Layer: 0
   m_Name: Player_Opponent
   m_TagString: OponentTeam
@@ -5462,6 +5500,18 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &531083909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 531083905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af706ea80ed2d4c4a86479cabfd98dfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oppoState: 0
 --- !u!1 &549088250
 GameObject:
   m_ObjectHideFlags: 0
@@ -6347,18 +6397,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   onUp:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1135360900}
-        m_MethodName: PassUp
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: ETCButton+OnUPHandler, Assembly-CSharp-firstpass, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   axis:
@@ -8314,6 +8353,7 @@ GameObject:
   - component: {fileID: 841597470}
   - component: {fileID: 841597469}
   - component: {fileID: 841597468}
+  - component: {fileID: 841597471}
   m_Layer: 0
   m_Name: Player_Opponent (2)
   m_TagString: OponentTeam
@@ -8370,6 +8410,18 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &841597471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 841597467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af706ea80ed2d4c4a86479cabfd98dfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oppoState: 0
 --- !u!1 &846367632
 GameObject:
   m_ObjectHideFlags: 0
@@ -10369,6 +10421,11 @@ MonoBehaviour:
   player3Script: {fileID: 0}
   player4Script: {fileID: 0}
   player5Script: {fileID: 0}
+  oppo1Script: {fileID: 0}
+  oppo2Script: {fileID: 0}
+  oppo3Script: {fileID: 0}
+  oppo4Script: {fileID: 0}
+  oppo5Script: {fileID: 0}
   players:
   - {fileID: 1631777704}
   - {fileID: 841191090}
@@ -10440,7 +10497,7 @@ MonoBehaviour:
   position11: {fileID: 4927220162813296, guid: 5b0299f16e5d54d4cb9f3a3d90b766be, type: 2}
   position12: {fileID: 4526698335137566, guid: 5b0299f16e5d54d4cb9f3a3d90b766be, type: 2}
   timeText: {fileID: 1055332588}
-  matchTime: 10
+  matchTime: 60
   ballRgd: {fileID: 0}
   insBall: {fileID: 0}
   ball: {fileID: 100000, guid: 50ac29d6ac8604f1ab45ea4fdc30e7ee, type: 2}
@@ -12341,9 +12398,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1407398791}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c883acd510654d9469852dc86f2686ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 8655082366eaf9a48a478d41b2a04d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SettingPanel1: {fileID: 0}
+  cameraSetting: {fileID: 0}
 --- !u!114 &1407398794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16109,6 +16168,7 @@ GameObject:
   - component: {fileID: 1900345429}
   - component: {fileID: 1900345428}
   - component: {fileID: 1900345427}
+  - component: {fileID: 1900345430}
   m_Layer: 0
   m_Name: Player_Opponent (1)
   m_TagString: OponentTeam
@@ -16165,6 +16225,18 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &1900345430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1900345426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af706ea80ed2d4c4a86479cabfd98dfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oppoState: 0
 --- !u!1 &1904585131
 GameObject:
   m_ObjectHideFlags: 0

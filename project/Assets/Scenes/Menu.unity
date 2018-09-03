@@ -439,6 +439,7 @@ GameObject:
   - component: {fileID: 534669905}
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
+  - component: {fileID: 534669906}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -506,6 +507,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &534669906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8655082366eaf9a48a478d41b2a04d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SettingPanel1: {fileID: 0}
+  cameraSetting: {fileID: 114650878711896276, guid: 0ae1b78d2c7e8ad4f89c1b8d1a16eb83,
+    type: 2}
 --- !u!1 &593551657
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,7 +532,6 @@ GameObject:
   - component: {fileID: 593551661}
   - component: {fileID: 593551660}
   - component: {fileID: 593551659}
-  - component: {fileID: 593551662}
   m_Layer: 5
   m_Name: SettingBtn
   m_TagString: Untagged
@@ -583,7 +597,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 593551662}
+      - m_Target: {fileID: 534669906}
         m_MethodName: ClickSettingBtn
         m_Mode: 1
         m_Arguments:
@@ -630,17 +644,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 593551657}
   m_CullTransparentMesh: 0
---- !u!114 &593551662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 593551657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c883acd510654d9469852dc86f2686ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1111705722
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,7 +655,6 @@ GameObject:
   - component: {fileID: 1111705726}
   - component: {fileID: 1111705725}
   - component: {fileID: 1111705724}
-  - component: {fileID: 1111705727}
   - component: {fileID: 1111705728}
   m_Layer: 5
   m_Name: startBtn
@@ -719,7 +721,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1111705727}
+      - m_Target: {fileID: 534669906}
         m_MethodName: ClickStartBtn
         m_Mode: 1
         m_Arguments:
@@ -766,19 +768,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1111705722}
   m_CullTransparentMesh: 0
---- !u!114 &1111705727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1111705722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebddffbb6f3e1504ca20e9af87daa939, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraSetting: {fileID: 114980324038401660, guid: 3ba39acfb0d697d4f854f51125d841bd,
-    type: 2}
 --- !u!114 &1111705728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1053,7 +1042,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1581011899}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 534669906}
+        m_MethodName: ClickExitBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1581011899

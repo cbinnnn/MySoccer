@@ -17,36 +17,14 @@ public class Trigger : MonoBehaviour {
         if (other.tag == "Ball"&&transform.parent.name=="GoalMeshRight")
         {
             score1++;
-            GameManager.Instance.player1Animator.SetTrigger("Win");
-            GameManager.Instance.player2Animator.SetTrigger("Win");
-            GameManager.Instance.player3Animator.SetTrigger("Win");
-            GameManager.Instance.player4Animator.SetTrigger("Win");
-            GameManager.Instance.player5Animator.SetTrigger("Win");
-            GameManager.Instance.goalKeeperAnimator.SetTrigger("Win");
-            GameManager.Instance.opponent1Animator.SetTrigger("Lose");
-            GameManager.Instance.opponent2Animator.SetTrigger("Lose");
-            GameManager.Instance.opponent3Animator.SetTrigger("Lose");
-            GameManager.Instance.opponent4Animator.SetTrigger("Lose");
-            GameManager.Instance.opponent5Animator.SetTrigger("Lose");
-            GameManager.Instance.opponentGoalKeeperAnimator.SetTrigger("Lose");
+            GameManager.Instance.TeamWin();
             AudioManager.Instance.audioSources[0].PlayOneShot(AudioManager.Instance.applause);
             StartCoroutine(GameManager.Instance.Restart());
         }
         else if (other.tag == "Ball" &&transform.parent.name == "GoalMeshLeft")
         {
             score2++;
-            GameManager.Instance.player1Animator.SetTrigger("Lose");
-            GameManager.Instance.player2Animator.SetTrigger("Lose");
-            GameManager.Instance.player3Animator.SetTrigger("Lose");
-            GameManager.Instance.player4Animator.SetTrigger("Lose");
-            GameManager.Instance.player5Animator.SetTrigger("Lose");
-            GameManager.Instance.goalKeeperAnimator.SetTrigger("Lose");
-            GameManager.Instance.opponent1Animator.SetTrigger("Win");
-            GameManager.Instance.opponent2Animator.SetTrigger("Win");
-            GameManager.Instance.opponent3Animator.SetTrigger("Win");
-            GameManager.Instance.opponent4Animator.SetTrigger("Win");
-            GameManager.Instance.opponent5Animator.SetTrigger("Win");
-            GameManager.Instance.opponentGoalKeeperAnimator.SetTrigger("Win");
+            GameManager.Instance.OppoWin();
             StartCoroutine(GameManager.Instance.Restart());
         }
     }
