@@ -214,7 +214,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1900345426}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.6389282, y: -1.060281, z: -11.070676}
+  m_LocalPosition: {x: -3.6389282, y: -1.060742, z: -11.070676}
   m_LocalScale: {x: 1.65, y: 1.65, z: 1.65}
   m_Children:
   - {fileID: 496243075}
@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 25405782}
   - component: {fileID: 25405785}
   m_Layer: 0
-  m_Name: Player_Opponent (3)
+  m_Name: RightGuard
   m_TagString: OponentTeam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -377,13 +377,13 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 25405781}
   serializedVersion: 2
-  m_Mass: 75
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 120
+  m_Drag: 1
+  m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 126
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!114 &25405785
 MonoBehaviour:
@@ -396,6 +396,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af706ea80ed2d4c4a86479cabfd98dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goal: {fileID: 888234424}
+  power: 100
   oppoState: 0
 --- !u!1 &28263353
 GameObject:
@@ -1237,7 +1239,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 531083905}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.108929, y: -1.060281, z: -5.400676}
+  m_LocalPosition: {x: -8.108929, y: -1.0607421, z: -5.400676}
   m_LocalScale: {x: 1.65, y: 1.65, z: 1.65}
   m_Children:
   - {fileID: 1987929740}
@@ -3451,7 +3453,7 @@ GameObject:
   - component: {fileID: 361332322}
   - component: {fileID: 361332325}
   m_Layer: 0
-  m_Name: Player_Opponent (4)
+  m_Name: RightForward
   m_TagString: OponentTeam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3498,13 +3500,13 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 361332321}
   serializedVersion: 2
-  m_Mass: 75
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 120
+  m_Drag: 1
+  m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 126
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!114 &361332325
 MonoBehaviour:
@@ -3517,6 +3519,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af706ea80ed2d4c4a86479cabfd98dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goal: {fileID: 888234424}
+  power: 100
   oppoState: 0
 --- !u!1 &377269138
 GameObject:
@@ -5392,9 +5396,9 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 521903943}
   serializedVersion: 2
-  m_Mass: 75
-  m_Drag: 0.4
-  m_AngularDrag: 0.4
+  m_Mass: 120
+  m_Drag: 1
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -5445,7 +5449,7 @@ GameObject:
   - component: {fileID: 531083906}
   - component: {fileID: 531083909}
   m_Layer: 0
-  m_Name: Player_Opponent
+  m_Name: LeftForward
   m_TagString: OponentTeam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5492,13 +5496,13 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 531083905}
   serializedVersion: 2
-  m_Mass: 75
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 120
+  m_Drag: 1
+  m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 126
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!114 &531083909
 MonoBehaviour:
@@ -5511,6 +5515,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af706ea80ed2d4c4a86479cabfd98dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goal: {fileID: 888234424}
+  power: 100
   oppoState: 0
 --- !u!1 &549088250
 GameObject:
@@ -8223,9 +8229,9 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 840842195}
   serializedVersion: 2
-  m_Mass: 75
-  m_Drag: 0.4
-  m_AngularDrag: 0.4
+  m_Mass: 120
+  m_Drag: 1
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -8355,7 +8361,7 @@ GameObject:
   - component: {fileID: 841597468}
   - component: {fileID: 841597471}
   m_Layer: 0
-  m_Name: Player_Opponent (2)
+  m_Name: CenterForward
   m_TagString: OponentTeam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8402,13 +8408,13 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 841597467}
   serializedVersion: 2
-  m_Mass: 75
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 120
+  m_Drag: 1
+  m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 126
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!114 &841597471
 MonoBehaviour:
@@ -8421,6 +8427,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af706ea80ed2d4c4a86479cabfd98dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goal: {fileID: 888234424}
+  power: 100
   oppoState: 0
 --- !u!1 &846367632
 GameObject:
@@ -8972,11 +8980,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4396543277188020, guid: 9f61ef8dae6606643a9a8bd23eab960e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f61ef8dae6606643a9a8bd23eab960e, type: 2}
   m_IsPrefabAsset: 0
+--- !u!4 &888234424 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4745962251616180, guid: 9f61ef8dae6606643a9a8bd23eab960e,
+    type: 2}
+  m_PrefabInternal: {fileID: 888234423}
 --- !u!1 &897177170
 GameObject:
   m_ObjectHideFlags: 0
@@ -9696,11 +9709,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 463063080}
-  - {fileID: 1631777700}
   - {fileID: 1631777702}
   - {fileID: 1631777701}
   - {fileID: 1631777699}
   - {fileID: 1631777698}
+  - {fileID: 1631777700}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10739,7 +10752,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 25405781}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.981071, y: -1.060281, z: -11.030676}
+  m_LocalPosition: {x: 8.981071, y: -1.060742, z: -11.030676}
   m_LocalScale: {x: 1.65, y: 1.65, z: 1.65}
   m_Children:
   - {fileID: 756340627}
@@ -10756,7 +10769,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 841597467}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.8810717, y: -1.060281, z: -5.5206757}
+  m_LocalPosition: {x: 1.8810717, y: -1.060742, z: -5.5206757}
   m_LocalScale: {x: 1.65, y: 1.65, z: 1.65}
   m_Children:
   - {fileID: 1045011540}
@@ -14368,7 +14381,7 @@ Transform:
   - {fileID: 720807733}
   - {fileID: 2042307183}
   m_Father: {fileID: 1009823446}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1631777699
 Transform:
@@ -14385,7 +14398,7 @@ Transform:
   - {fileID: 1046289986}
   - {fileID: 261228858}
   m_Father: {fileID: 1009823446}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1631777700
 Transform:
@@ -14402,7 +14415,7 @@ Transform:
   - {fileID: 745099377}
   - {fileID: 841191091}
   m_Father: {fileID: 1009823446}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1631777701
 Transform:
@@ -14419,7 +14432,7 @@ Transform:
   - {fileID: 1674775256}
   - {fileID: 1002349880}
   m_Father: {fileID: 1009823446}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1631777702
 Transform:
@@ -14436,7 +14449,7 @@ Transform:
   - {fileID: 1146962476}
   - {fileID: 549088251}
   m_Father: {fileID: 1009823446}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1631777703
 Transform:
@@ -14983,7 +14996,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 361332321}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.121072, y: -1.060281, z: -5.6906757}
+  m_LocalPosition: {x: 12.121072, y: -1.060742, z: -5.6906757}
   m_LocalScale: {x: 1.65, y: 1.65, z: 1.65}
   m_Children:
   - {fileID: 58407150}
@@ -16170,7 +16183,7 @@ GameObject:
   - component: {fileID: 1900345427}
   - component: {fileID: 1900345430}
   m_Layer: 0
-  m_Name: Player_Opponent (1)
+  m_Name: LeftGuard
   m_TagString: OponentTeam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16217,13 +16230,13 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1900345426}
   serializedVersion: 2
-  m_Mass: 75
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 120
+  m_Drag: 1
+  m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 126
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!114 &1900345430
 MonoBehaviour:
@@ -16236,6 +16249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af706ea80ed2d4c4a86479cabfd98dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goal: {fileID: 888234424}
+  power: 100
   oppoState: 0
 --- !u!1 &1904585131
 GameObject:

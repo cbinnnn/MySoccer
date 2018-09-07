@@ -319,20 +319,20 @@ public class GameManager : MonoBehaviour {
         Opponent5.rotation = position11.rotation;
         OpponentGoalKeeper.position = position12.position;
         OpponentGoalKeeper.rotation = position12.rotation;
-        player1Animator.SetTrigger("Alert");
-        player2Animator.SetTrigger("Alert");
-        player3Animator.SetTrigger("Alert");
-        player4Animator.SetTrigger("Alert");
-        player5Animator.SetTrigger("Alert");
-        goalKeeperAnimator.SetTrigger("Alert");
-        opponent1Animator.SetTrigger("Alert");
-        opponent2Animator.SetTrigger("Alert");
-        opponent3Animator.SetTrigger("Alert");
-        opponent4Animator.SetTrigger("Alert");
-        opponent5Animator.SetTrigger("Alert");
-        opponentGoalKeeperAnimator.SetTrigger("Alert");
+        player1Animator.SetBool("Alert",true);
+        player2Animator.SetBool("Alert", true);
+        player3Animator.SetBool("Alert", true);
+        player4Animator.SetBool("Alert", true);
+        player5Animator.SetBool("Alert", true);
+        goalKeeperAnimator.SetBool("Alert", true);
+        opponent1Animator.SetBool("Alert", true);
+        opponent2Animator.SetBool("Alert", true);
+        opponent3Animator.SetBool("Alert", true);
+        opponent4Animator.SetBool("Alert", true);
+        opponent5Animator.SetBool("Alert", true);
+        opponentGoalKeeperAnimator.SetBool("Alert", true);
     }
-    public bool AttackState()
+    public bool TeamAttackState()
     {
         if (player1Script.playerState == Player.PlayerState.HOLDING|| player2Script.playerState == Player.PlayerState.HOLDING|| player3Script.playerState == Player.PlayerState.HOLDING|| player4Script.playerState == Player.PlayerState.HOLDING|| player5Script.playerState == Player.PlayerState.HOLDING)
         {
@@ -343,7 +343,7 @@ public class GameManager : MonoBehaviour {
             return false;
         }
     }
-    public bool DefenseState()
+    public bool TeamDefenseState()
     {
         if (oppo1Script.oppoState == Opponent.OppoState.HOLDING|| oppo2Script.oppoState == Opponent.OppoState.HOLDING||oppo3Script.oppoState == Opponent.OppoState.HOLDING|| oppo4Script.oppoState == Opponent.OppoState.HOLDING|| oppo5Script.oppoState == Opponent.OppoState.HOLDING)
         {
@@ -354,7 +354,7 @@ public class GameManager : MonoBehaviour {
             return false;
         }
     }
-    public bool AllAttack()
+    public bool TeamAllAttack()
     {
         if(player1Script.playerState==Player.PlayerState.ATTACK&& player2Script.playerState == Player.PlayerState.ATTACK&& player3Script.playerState == Player.PlayerState.ATTACK&& player4Script.playerState == Player.PlayerState.ATTACK&& player5Script.playerState == Player.PlayerState.ATTACK)
         {
@@ -365,7 +365,18 @@ public class GameManager : MonoBehaviour {
             return false;
         }
     }
-    public Transform DefensePlayer()
+    public bool OppoAllAttack()
+    {
+        if (oppo1Script.oppoState == Opponent.OppoState.ATTACK && oppo2Script.oppoState == Opponent.OppoState.ATTACK && oppo3Script.oppoState == Opponent.OppoState.ATTACK && oppo4Script.oppoState == Opponent.OppoState.ATTACK && oppo5Script.oppoState == Opponent.OppoState.ATTACK)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public Transform TeamDefensePlayer()
     {
         Transform defensePlayer = Player1;
         Transform[] players = { Player2, Player3, Player4, Player5 };
@@ -375,6 +386,20 @@ public class GameManager : MonoBehaviour {
             if (Vector3.Distance(insBall.transform.position, players[i].position) < Vector3.Distance(insBall.transform.position, defensePlayer.position))
             {
                 defensePlayer = players[i];
+            }
+        }
+        return defensePlayer;
+    }
+    public Transform OppoDefensePlayer()
+    {
+        Transform defensePlayer = Opponent1;
+        Transform[] oppos = { Opponent2, Opponent3, Opponent4, Opponent5 };
+        for (int i = 0; i < oppos.Length; i++)
+        {
+            //找出与足球距离最近的球员
+            if (Vector3.Distance(insBall.transform.position, oppos[i].position) < Vector3.Distance(insBall.transform.position, defensePlayer.position))
+            {
+                defensePlayer = oppos[i];
             }
         }
         return defensePlayer;
